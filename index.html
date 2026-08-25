@@ -3,78 +3,229 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RCDK | Home</title>
+  <title>RCDK | Digital Excellence</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --maroon-base: #800000;
+      --maroon-dark: #500000;
+      --maroon-accent: #a31c1c;
+      --maroon-soft: #fff5f5;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --bg-light: #f8fafc;
+      --white: #ffffff;
+      --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 25px -5px rgba(128,0,0,0.15);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
     }
+
     body {
-      background-color: #f4f7f6;
-      color: #333;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
     }
+
+    /* Header & Navigation */
     header {
-      background-color: #1a252f;
-      padding: 1rem 2rem;
+      background-color: var(--maroon-dark);
       position: sticky;
       top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
+
     nav {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1.2rem 2rem;
     }
+
     .logo {
-      color: #fff;
-      font-size: 1.5rem;
-      font-weight: bold;
+      color: var(--white);
+      font-size: 1.6rem;
+      font-weight: 800;
       text-decoration: none;
+      letter-spacing: 2px;
+      border: 2px solid var(--maroon-accent);
+      padding: 4px 14px;
+      border-radius: 6px;
+      transition: transform 0.2s ease;
     }
+
+    .logo:hover {
+      transform: scale(1.03);
+    }
+
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 1.2rem;
+      gap: 1.5rem;
     }
+
     .nav-links a {
-      color: #fff;
+      color: rgba(255,255,255,0.85);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
     }
+
+    .nav-links a:hover,
     .nav-links a.active {
-      color: #3498db;
+      color: var(--white);
+      background-color: var(--maroon-accent);
     }
+
+    /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, #2c3e50, #3498db);
-      color: white;
+      background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon-base) 60%, #3a0000 100%);
+      color: var(--white);
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 6rem 2rem 7rem;
+      position: relative;
     }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #f1f5f9;
+      max-width: 650px;
+      margin: 0 auto 2rem;
+      font-weight: 300;
+    }
+
+    .hero-btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background-color: var(--white);
+      color: var(--maroon-dark);
+      padding: 14px 32px;
+      font-weight: 700;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--maroon-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--white);
+      color: var(--white);
+      padding: 14px 32px;
+      font-weight: 700;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Content Layout */
     .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      max-width: 1200px;
+      margin: -3rem auto 4rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 10;
     }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
     .card {
-      background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: var(--white);
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      border-top: 5px solid var(--maroon-base);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .card h3 {
+      color: var(--maroon-dark);
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Footer */
     footer {
+      background-color: var(--maroon-dark);
+      color: rgba(255,255,255,0.7);
       text-align: center;
-      padding: 1.5rem;
-      background: #1a252f;
-      color: #aaa;
-      margin-top: 3rem;
+      padding: 3rem 2rem;
+      border-top: 4px solid var(--maroon-accent);
+    }
+
+    footer p {
+      font-size: 0.95rem;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      nav { flex-direction: column; gap: 1rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+      .hero-btn-group { flex-direction: column; gap: 0.8rem; }
+      .container { margin-top: -2rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Navigation Header -->
   <header>
     <nav>
       <a href="index.html" class="logo">RCDK</a>
@@ -87,84 +238,41 @@
     </nav>
   </header>
 
+  <!-- Hero Banner -->
   <section class="hero">
     <h1>Welcome to RCDK</h1>
-    <p>Official Digital Hub</p>
+    <p>Building high-quality digital solutions, interactive projects, and modern web platforms with continuous innovation.</p>
+    <div class="hero-btn-group">
+      <a href="projects.html" class="btn-primary">View Projects</a>
+      <a href="contact.html" class="btn-secondary">Get in Touch</a>
+    </div>
   </section>
 
-  <div class="container">
-    <div class="card">
-      <h2>Home Section</h2>
-      <p>Welcome to the main homepage of RCDK. Tap the tabs in the menu bar at the top to navigate to different pages!</p>
+  <!-- Grid Cards Section -->
+  <main class="container">
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h3>Our Vision</h3>
+        <p>Delivering high-performance, responsive, and visually refined web setups built to scale seamlessly across devices.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Active Projects</h3>
+        <p>Explore our ongoing builds, creative designs, and interactive showcases continuously updated right here on RCDK.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛠️</div>
+        <h3>Technical Support</h3>
+        <p>Need assistance or looking to collaborate? Access custom tools and detailed technical documentation built into our hub.</p>
+      </div>
     </div>
-  </div>
+  </main>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2026 RCDK</p>
+    <p>&copy; 2026 RCDK Platform. All Rights Reserved.</p>
   </footer>
 
 </body>
-</html>      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      margin-bottom: 2rem;
-    }
-
-    .card h2 {
-      color: #2c3e50;
-      margin-bottom: 1rem;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #1a252f;
-      color: #7f8c8d;
-      margin-top: 3rem;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Navigation Bar with Tabs -->
-  <header>
-    <nav>
-      <a href="#home" class="logo">RCDK</a>
-      <ul class="nav-links">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <h1>Welcome to RCDK</h1>
-    <p>Official Hub & Digital Workspace</p>
-  </section>
-
-  <!-- Main Content Areas -->
-  <div class="container">
-    <div id="about" class="card">
-      <h2>About RCDK</h2>
-      <p>This is your official website home page. You can customize this section to introduce your project, app, or workspace.</p>
-    </div>
-
-    <div id="projects" class="card">
-      <h2>Featured Projects</h2>
-      <p>Showcase your builds, scripts, apps, or media content right here.</p>
-    </div>
-
-    <div id="contact" class="card">
-      <h2>Get in Touch</h2>
-      <p>Add your contact details, social links, or channel references here.</p>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2026 RCDK. All rights reserved.</p>
-  </footer>
-
-</body>
-    </html>            
+                                                        </html>
