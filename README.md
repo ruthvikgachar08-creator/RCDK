@@ -1,32 +1,110 @@
-<!-- Replace your old nav bar with this in ALL your HTML files -->
-<header>
-  <nav>
-    <a href="index.html" class="logo">RCDK</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-    .hero p {
-      font-size: 1.2rem;
-      opacity: 0.9;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCDK | Home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
-
-    /* Main Content Container */
-    .container {
+    body {
+      background-color: #f4f7f6;
+      color: #333;
+    }
+    header {
+      background-color: #1a252f;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+    }
+    nav {
       max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
+    .logo {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .nav-links a.active {
+      color: #3498db;
+    }
+    .hero {
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
     .card {
       background: white;
       padding: 2rem;
       border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #1a252f;
+      color: #aaa;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html" class="logo">RCDK</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to RCDK</h1>
+    <p>Official Digital Hub</p>
+  </section>
+
+  <div class="container">
+    <div class="card">
+      <h2>Home Section</h2>
+      <p>Welcome to the main homepage of RCDK. Tap the tabs in the menu bar at the top to navigate to different pages!</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RCDK</p>
+  </footer>
+
+</body>
+</html>      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
       margin-bottom: 2rem;
     }
 
