@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCDK | Projects</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: #fcfafb; color: #333; line-height: 1.7; }
+    :root {
+      --maroon-primary: #800000;
+      --maroon-dark: #660000;
+      --maroon-light: #a52a2a;
+      --text-on-maroon: #ffffff;
+      --body-text: #2c3e50;
+    }
+    header { background-color: var(--maroon-dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    .logo { color: var(--text-on-maroon); font-size: 1.8rem; font-weight: 800; text-decoration: none; letter-spacing: 2px; border: 2px solid var(--maroon-light); padding: 4px 12px; }
+    .nav-links { list-style: none; display: flex; gap: 1rem; }
+    .nav-links a { color: var(--text-on-maroon); text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 8px 18px; border-radius: 4px; text-transform: uppercase; transition: all 0.3s ease; }
+    .nav-links a:hover, .nav-links a.active { background-color: var(--text-on-maroon); color: var(--maroon-dark); }
+    .hero { background: linear-gradient(135deg, var(--maroon-dark) 0%, #4a0000 100%); color: var(--text-on-maroon); text-align: center; padding: 4rem 2rem; border-bottom: 5px solid var(--maroon-light); }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; }
+    .main-container { max-width: 1100px; margin: 3rem auto; padding: 0 1.5rem; }
+    .section-card { background: #ffffff; padding: 3rem; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 4px solid var(--maroon-primary); margin-bottom: 2.5rem; }
+    .section-card h2 { color: var(--maroon-dark); font-size: 2rem; margin-bottom: 1.2rem; text-transform: uppercase; }
+    footer { text-align: center; padding: 2.5rem; background-color: var(--maroon-dark); color: #ccc; margin-top: 4rem; border-top: 3px solid var(--maroon-light); }
+    @media (max-width: 768px) {
+      nav { flex-direction: column; padding: 1rem; }
+      .logo { margin-bottom: 1rem; }
+      .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 5px; }
+      .nav-links a { padding: 8px 12px; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">RCDK</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <section class="hero">
+    <h1>RCDK Projects</h1>
+    <p>Showcasing Our Work</p>
+  </section>
+
+  <main class="main-container">
+    <div class="section-card">
+      <h2>Featured Work</h2>
+      <p>Here you can list your active projects, gaming streams, robotics builds, or digital showcase items.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 RCDK. All Rights Reserved.</p>
+  </footer>
+</body>
+  </html>
