@@ -273,6 +273,129 @@
   <footer>
     <p>&copy; 2026 RCDK Platform. All Rights Reserved.</p>
   </footer>
+<!-- Floating Chatbot Widget -->
+<style>
+  .chat-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #800000;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
 
+  .chat-window {
+    display: none;
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    width: 300px;
+    height: 380px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    border: 2px solid #800000;
+  }
+
+  .chat-header {
+    background: #660000;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fcfafb;
+  }
+
+  .bot-msg, .user-msg {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+
+  .bot-msg { background: #eee; color: #333; align-self: flex-start; }
+  .user-msg { background: #800000; color: white; align-self: flex-end; }
+
+  .chat-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .opt-btn {
+    background: white;
+    border: 1px solid #800000;
+    color: #800000;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-align: left;
+  }
+</style>
+
+<button class="chat-btn" onclick="toggleChat()">💬</button>
+
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    RCDK Bot 🤖
+    <span style="cursor:pointer;" onclick="toggleChat()">✖</span>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="bot-msg">Hi! Welcome to RCDK. What would you like to know?</div>
+    <div class="chat-options">
+      <button class="opt-btn" onclick="sendReply('Tell me about RCDK', 'RCDK is a digital hub showcasing innovative projects and tech builds!')">About RCDK</button>
+      <button class="opt-btn" onclick="sendReply('What projects are here?', 'Check out our Projects tab to see featured tech builds!')">Our Projects</button>
+      <button class="opt-btn" onclick="sendReply('How can I contact?', 'Head to the Contact tab or leave us a message!')">Contact Us</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleChat() {
+    const chat = document.getElementById('chatWindow');
+    chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  function sendReply(userText, botResponse) {
+    const body = document.getElementById('chatBody');
+    
+    const uMsg = document.createElement('div');
+    uMsg.className = 'user-msg';
+    uMsg.innerText = userText;
+    body.appendChild(uMsg);
+
+    setTimeout(() => {
+      const bMsg = document.createElement('div');
+      bMsg.className = 'bot-msg';
+      bMsg.innerText = botResponse;
+      body.appendChild(bMsg);
+      body.scrollTop = body.scrollHeight;
+    }, 300);
+
+    body.scrollTop = body.scrollHeight;
+  }
+</script>
 </body>
                                                         </html>
