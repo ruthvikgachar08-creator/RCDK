@@ -6,333 +6,139 @@
   <title>RCDK</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background-color: #121212;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background-color: #800000;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: 600;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      background-color: #1a1a1a;
-      padding: 10px;
-    }
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 400;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #800000;
-    }
-    main {
-      flex: 1;
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .hero {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .hero h1 {
-      font-size: 36px;
-      color: #800000;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      color: #cccccc;
-      font-size: 18px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background-color: #1e1e1e;
-      padding: 20px;
-      border-radius: 8px;
-      border: 1px solid #333;
-    }
-    .card h3 {
-      color: #800000;
-      margin-bottom: 10px;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background-color: #121212; color: #ffffff; display: flex; flex-direction: column; min-height: 100vh; }
+    header { background-color: #800000; padding: 20px; text-align: center; font-size: 24px; font-weight: 600; }
+    nav { display: flex; justify-content: center; gap: 20px; background-color: #1a1a1a; padding: 10px; }
+    nav a { color: #ffffff; text-decoration: none; transition: color 0.3s; }
+    nav a:hover { color: #800000; }
+    main { flex: 1; padding: 40px 20px; max-width: 1000px; margin: 0 auto; width: 100%; }
 
-    /* Feedback & Review Styling */
-    .feedback-section {
-      background-color: #1e1e1e;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 30px;
-      margin-top: 40px;
-      text-align: center;
-    }
-    .feedback-section h2 {
-      color: #800000;
-      margin-bottom: 8px;
-    }
-    .feedback-section p {
-      color: #cccccc;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-    .feedback-form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    /* Interactive 5-Star Rating System */
-    .star-rating {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: center;
-      gap: 5px;
-    }
-    .star-rating input {
-      display: none;
-    }
-    .star-rating label {
-      font-size: 32px;
-      color: #444;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-    .star-rating label:hover,
-    .star-rating label:hover ~ label,
-    .star-rating input:checked ~ label {
-      color: #ffca28;
-    }
+    .hero { text-align: center; margin-bottom: 40px; }
+    .hero h1 { font-size: 36px; color: #800000; margin-bottom: 10px; }
 
-    .feedback-form textarea {
-      width: 100%;
-      max-width: 500px;
-      padding: 12px;
-      background-color: #121212;
-      border: 1px solid #333;
-      border-radius: 6px;
-      color: #ffffff;
-      resize: vertical;
-      font-size: 14px;
+    /* Custom Chatbot Floating Widget */
+    #chat-widget-button {
+      position: fixed; bottom: 20px; right: 20px;
+      background-color: #800000; color: white;
+      border: none; border-radius: 50%; width: 60px; height: 60px;
+      font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 1000;
     }
-    .feedback-form textarea:focus {
-      outline: none;
-      border-color: #800000;
+    #chat-box {
+      display: none; position: fixed; bottom: 90px; right: 20px;
+      width: 340px; height: 450px; background-color: #1e1e1e;
+      border: 1px solid #333; border-radius: 12px;
+      flex-direction: column; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.6); z-index: 1000;
     }
-    .submit-btn {
-      background-color: #800000;
-      color: #ffffff;
-      padding: 10px 24px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s;
+    .chat-header {
+      background-color: #800000; padding: 12px 16px;
+      display: flex; justify-content: space-between; align-items: center; font-weight: 600;
     }
-    .submit-btn:hover {
-      background-color: #a00000;
+    .chat-header button { background: none; border: none; color: white; font-size: 18px; cursor: pointer; }
+    .chat-messages {
+      flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 14px;
     }
-
-    /* Public Reviews Display List */
-    .reviews-display {
-      margin-top: 30px;
-      border-top: 1px solid #333;
-      padding-top: 20px;
-      text-align: left;
+    .msg { padding: 8px 12px; border-radius: 8px; max-width: 80%; line-height: 1.4; }
+    .user-msg { background-color: #800000; color: white; align-self: flex-end; }
+    .bot-msg { background-color: #2a2a2a; color: #ddd; align-self: flex-start; }
+    .chat-input-area { display: flex; border-top: 1px solid #333; padding: 8px; background-color: #141414; }
+    .chat-input-area input {
+      flex: 1; padding: 8px 12px; background: #222; border: 1px solid #444; color: white; border-radius: 6px; outline: none;
     }
-    .reviews-display h3 {
-      color: #800000;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-    .reviews-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .review-card {
-      background-color: #121212;
-      border: 1px solid #333;
-      border-radius: 6px;
-      padding: 12px 16px;
-    }
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-    }
-    .review-header strong {
-      color: #ffffff;
-    }
-    .review-header .stars {
-      color: #ffca28;
-    }
-    .review-card p {
-      color: #cccccc;
-      font-size: 14px;
-      margin: 0;
-    }
-
-    footer {
-      background-color: #1a1a1a;
-      text-align: center;
-      padding: 15px;
-      color: #777;
-      font-size: 14px;
+    .chat-input-area button {
+      background: #800000; border: none; color: white; padding: 8px 14px; margin-left: 6px; border-radius: 6px; cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    RCDK
-  </header>
-
+  <header>RCDK</header>
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="contact.html">Contact</a>
   </nav>
 
   <main>
     <section class="hero">
       <h1>Welcome to RCDK</h1>
-      <p>Exploring projects, digital solutions, and high-performance interactive tools.</p>
-    </section>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Innovation</h3>
-        <p>Building next-generation projects powered by intelligent AI and modern design.</p>
-      </div>
-      <div class="card">
-        <h3>Development</h3>
-        <p>Creating clean, functional, and responsive applications across web platforms.</p>
-      </div>
-      <div class="card">
-        <h3>AI Integration</h3>
-        <p>Ask our built-in chatbot Complexity any general knowledge or site-related question.</p>
-      </div>
-    </div>
-
-    <!-- Review & Feedback Section -->
-    <section class="feedback-section">
-      <div id="review-form-container">
-        <h2>Leave Us a Review</h2>
-        <p>How would you rate your experience with RCDK & Complexity?</p>
-        
-        <form class="feedback-form" id="reviewForm" onsubmit="submitReview(event)">
-          <div class="star-rating">
-            <input type="radio" id="star5" name="rating" value="5" required />
-            <label for="star5" title="5 stars">&#9733;</label>
-
-            <input type="radio" id="star4" name="rating" value="4" />
-            <label for="star4" title="4 stars">&#9733;</label>
-
-            <input type="radio" id="star3" name="rating" value="3" />
-            <label for="star3" title="3 stars">&#9733;</label>
-
-            <input type="radio" id="star2" name="rating" value="2" />
-            <label for="star2" title="2 stars">&#9733;</label>
-
-            <input type="radio" id="star1" name="rating" value="1" />
-            <label for="star1" title="1 star">&#9733;</label>
-          </div>
-
-          <input type="text" id="reviewerName" placeholder="Your Name" required style="width: 100%; max-width: 500px; padding: 10px; background: #121212; border: 1px solid #333; border-radius: 6px; color: #fff; font-size: 14px;" />
-          <textarea id="reviewerFeedback" placeholder="Write your feedback here..." rows="3" required></textarea>
-          
-          <button type="submit" class="submit-btn">Submit Review</button>
-        </form>
-      </div>
-
-      <div id="thank-you-message" style="display: none; color: #4CAF50; margin-bottom: 20px;">
-        <h3>Thank you for your review! 🎉</h3>
-        <p>Your review has been published below.</p>
-      </div>
-
-      <div class="reviews-display">
-        <h3>User Reviews</h3>
-        <div id="reviewsContainer" class="reviews-list">
-          <div class="review-card">
-            <div class="review-header">
-              <strong>Ruthvik</strong>
-              <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            </div>
-            <p>Complexity is super fast and answers general knowledge questions perfectly!</p>
-          </div>
-        </div>
-      </div>
+      <p>Unlimited AI assistant ready to help!</p>
     </section>
   </main>
 
-  <footer>
-    &copy; 2026 RCDK. All Rights Reserved.
-  </footer>
+  <!-- Floating Chatbot Button -->
+  <button id="chat-widget-button" onclick="toggleChat()">💬</button>
 
-  <!-- Submission Handler Script -->
+  <!-- Chat Window -->
+  <div id="chat-box">
+    <div class="chat-header">
+      <span>Complexity AI</span>
+      <button onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot-msg">Hello! I am Complexity. How can I help you today?</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="userInput" placeholder="Ask Complexity..." onkeypress="handleKey(event)" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
   <script>
-    function submitReview(event) {
-      event.preventDefault();
+    // Paste your Google Gemini API key inside the quotes below:
+    const GEMINI_API_KEY = "AQ.Ab8RN6LON180kyuI1IYpFmmEf5YfoGUFQlpViq1mAmoaZUTxFA";
 
-      const name = document.getElementById('reviewerName').value;
-      const feedback = document.getElementById('reviewerFeedback').value;
-      const ratingInput = document.querySelector('input[name="rating"]:checked');
-      const rating = ratingInput ? parseInt(ratingInput.value) : 5;
+    const SYSTEM_PROMPT = "You are Complexity, an AI assistant for RCDK. RCDK stands for: R = RUTHVIK G ACHAR (Creator & Founder), C = CHINMAYA (Developer's Teammate/Friend), D = DAIWIK (Developer's Teammate/Friend), K = KANISHK (Developer's Teammate/Friend). Ruthvik G Achar created and built RCDK.";
 
-      const starsString = '&#9733;'.repeat(rating);
+    function toggleChat() {
+      const chatBox = document.getElementById('chat-box');
+      chatBox.style.display = (chatBox.style.display === 'flex') ? 'none' : 'flex';
+    }
 
-      const reviewCard = document.createElement('div');
-      reviewCard.className = 'review-card';
-      reviewCard.innerHTML = `
-        <div class="review-header">
-          <strong>${name}</strong>
-          <span class="stars">${starsString}</span>
-        </div>
-        <p>${feedback}</p>
-      `;
+    function handleKey(e) {
+      if (e.key === 'Enter') sendMessage();
+    }
 
-      document.getElementById('reviewsContainer').prepend(reviewCard);
+    async function sendMessage() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
 
-      document.getElementById('review-form-container').style.display = 'none';
-      document.getElementById('thank-you-message').style.display = 'block';
+      const container = document.getElementById('chatMessages');
+
+      // User Message
+      const userDiv = document.createElement('div');
+      userDiv.className = 'msg user-msg';
+      userDiv.innerText = text;
+      container.appendChild(userDiv);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      // Loading indicator
+      const botDiv = document.createElement('div');
+      botDiv.className = 'msg bot-msg';
+      botDiv.innerText = "Thinking...";
+      container.appendChild(botDiv);
+      container.scrollTop = container.scrollHeight;
+
+      try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [
+              { role: 'user', parts: [{ text: SYSTEM_PROMPT + "\n\nUser Question: " + text }] }
+            ]
+          })
+        });
+        const data = await response.json();
+        const reply = data.candidates[0].content.parts[0].text;
+        botDiv.innerText = reply;
+      } catch (err) {
+        botDiv.innerText = "Sorry, I had trouble processing that request.";
+      }
+      container.scrollTop = container.scrollHeight;
     }
   </script>
 
-  <!-- Chatbase AI Chatbot (Complexity) -->
-  <script>
-  (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="y3lvhjKy4raCeK_L6rwof";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-  </script>
-<!-- Chat Warning Banner -->
-<div id="chat-notice" style="position: fixed; bottom: 90px; right: 20px; background: #1e1e1e; color: #ffca28; border: 1px solid #333; padding: 10px 14px; border-radius: 8px; font-size: 12px; max-width: 260px; z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-  ⚠️ <strong>Tip:</strong> If Complexity displays an error or stops responding, please click <strong>New Chat</strong> or refresh the page!
-</div>
 </body>
-      </html>            
+  </html>
