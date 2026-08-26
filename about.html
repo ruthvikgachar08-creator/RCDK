@@ -3,64 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RCDK | About</title>
+  <title>About Us - RCDK</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: #fcfafb; color: #333; line-height: 1.7; }
-    :root {
-      --maroon-primary: #800000;
-      --maroon-dark: #660000;
-      --maroon-light: #a52a2a;
-      --text-on-maroon: #ffffff;
-      --body-text: #2c3e50;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
     }
-    header { background-color: var(--maroon-dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-    .logo { color: var(--text-on-maroon); font-size: 1.8rem; font-weight: 800; text-decoration: none; letter-spacing: 2px; border: 2px solid var(--maroon-light); padding: 4px 12px; }
-    .nav-links { list-style: none; display: flex; gap: 1rem; }
-    .nav-links a { color: var(--text-on-maroon); text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 8px 18px; border-radius: 4px; text-transform: uppercase; transition: all 0.3s ease; }
-    .nav-links a:hover, .nav-links a.active { background-color: var(--text-on-maroon); color: var(--maroon-dark); }
-    .hero { background: linear-gradient(135deg, var(--maroon-dark) 0%, #4a0000 100%); color: var(--text-on-maroon); text-align: center; padding: 4rem 2rem; border-bottom: 5px solid var(--maroon-light); }
-    .hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; }
-    .main-container { max-width: 1100px; margin: 3rem auto; padding: 0 1.5rem; }
-    .section-card { background: #ffffff; padding: 3rem; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 4px solid var(--maroon-primary); margin-bottom: 2.5rem; }
-    .section-card h2 { color: var(--maroon-dark); font-size: 2rem; margin-bottom: 1.2rem; text-transform: uppercase; }
-    footer { text-align: center; padding: 2.5rem; background-color: var(--maroon-dark); color: #ccc; margin-top: 4rem; border-top: 3px solid var(--maroon-light); }
-    @media (max-width: 768px) {
-      nav { flex-direction: column; padding: 1rem; }
-      .logo { margin-bottom: 1rem; }
-      .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 5px; }
-      .nav-links a { padding: 8px 12px; font-size: 0.85rem; }
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #800000;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background-color: #1a1a1a;
+      padding: 10px;
+    }
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #800000;
+    }
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .about-card {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .about-card h1, .about-card h2 {
+      color: #800000;
+      margin-bottom: 15px;
+    }
+    .about-card p {
+      color: #cccccc;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    
+    /* Name Meaning Breakdown */
+    .name-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+      padding-left: 15px;
+      border-left: 3px solid #800000;
+    }
+    .name-item {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .name-item span {
+      color: #800000;
+    }
+    .role-tag {
+      font-size: 14px;
+      color: #aaaaaa;
+      font-weight: 400;
+      margin-left: 8px;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      text-align: center;
+      padding: 15px;
+      color: #777;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <nav>
-      <a href="index.html" class="logo">RCDK</a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+    RCDK
   </header>
 
-  <section class="hero">
-    <h1>About RCDK</h1>
-    <p>Our Mission & Story</p>
-  </section>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-  <main class="main-container">
-    <div class="section-card">
-      <h2>Who We Are</h2>
-      <p>Welcome to the official About page of RCDK. We focus on creating innovative solutions, engaging content, and digital experiences.</p>
-    </div>
+  <main>
+    <!-- Original About Info -->
+    <section class="about-card">
+      <h1>About RCDK</h1>
+      <p>Welcome to RCDK, a premier digital hub dedicated to innovative development, creative technology projects, and intelligent AI integration. Our platform is built to deliver smooth, high-performance web experiences and interactive applications.</p>
+    </section>
+
+    <!-- Meaning & Creator Section -->
+    <section class="about-card">
+      <h2>The Creator & Teammates Behind RCDK</h2>
+      <p>The name <strong>RCDK</strong> stands for Creator Ruthvik G Achar and his awesome teammates and friends:</p>
+      
+      <div class="name-breakdown">
+        <div class="name-item"><span>R</span> = RUTHVIK G ACHAR <span class="role-tag">(Creator & Founder)</span></div>
+        <div class="name-item"><span>C</span> = CHINMAYA <span class="role-tag">(Teammate / Friend)</span></div>
+        <div class="name-item"><span>D</span> = DAIWIK <span class="role-tag">(Teammate / Friend)</span></div>
+        <div class="name-item"><span>K</span> = KANISHK <span class="role-tag">(Teammate / Friend)</span></div>
+      </div>
+
+      <p>This website was entirely created, designed, and developed by <strong>Ruthvik G Achar</strong>. He built the RCDK platform to showcase innovative projects, develop custom software, and integrate AI agents like Complexity for everyone to use.</p>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 RCDK. All Rights Reserved.</p>
+    &copy; 2026 RCDK. All Rights Reserved.
   </footer>
+
+  <!-- Chatbase AI Chatbot (Complexity) -->
+  <script>
+  (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="y3lvhjKy4raCeK_L6rwof";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+  </script>
+
 </body>
-              </html>
+          </html>
