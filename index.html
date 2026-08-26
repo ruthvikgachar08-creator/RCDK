@@ -330,6 +330,9 @@
   <script>
   (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="y3lvhjKy4raCeK_L6rwof";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
   </script>
-
+<!-- Chat Warning Banner -->
+<div id="chat-notice" style="position: fixed; bottom: 90px; right: 20px; background: #1e1e1e; color: #ffca28; border: 1px solid #333; padding: 10px 14px; border-radius: 8px; font-size: 12px; max-width: 260px; z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+  ⚠️ <strong>Tip:</strong> If Complexity displays an error or stops responding, please click <strong>New Chat</strong> or refresh the page!
+</div>
 </body>
       </html>            
