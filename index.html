@@ -79,7 +79,7 @@
       margin-bottom: 10px;
     }
 
-    /* Feedback Section Styling */
+    /* Feedback & Review Styling */
     .feedback-section {
       background-color: #1e1e1e;
       border: 1px solid #333;
@@ -104,7 +104,7 @@
       gap: 15px;
     }
     
-    /* Interactive 5-Star System */
+    /* Interactive 5-Star Rating System */
     .star-rating {
       display: flex;
       flex-direction: row-reverse;
@@ -126,7 +126,6 @@
       color: #ffca28;
     }
 
-    /* Feedback Input & Button */
     .feedback-form textarea {
       width: 100%;
       max-width: 500px;
@@ -155,6 +154,49 @@
     }
     .submit-btn:hover {
       background-color: #a00000;
+    }
+
+    /* Public Reviews Display List */
+    .reviews-display {
+      margin-top: 30px;
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      text-align: left;
+    }
+    .reviews-display h3 {
+      color: #800000;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .reviews-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .review-card {
+      background-color: #121212;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 12px 16px;
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .review-header strong {
+      color: #ffffff;
+    }
+    .review-header .stars {
+      color: #ffca28;
+    }
+    .review-card p {
+      color: #cccccc;
+      font-size: 14px;
+      margin: 0;
     }
 
     footer {
@@ -202,31 +244,52 @@
 
     <!-- Review & Feedback Section -->
     <section class="feedback-section">
-      <h2>Leave Us a Review</h2>
-      <p>How would you rate your experience with RCDK & Complexity?</p>
-      
-      <form class="feedback-form" onsubmit="event.preventDefault(); alert('Thank you for your review!');">
-        <div class="star-rating">
-          <input type="radio" id="star5" name="rating" value="5" required />
-          <label for="star5" title="5 stars">&#9733;</label>
-
-          <input type="radio" id="star4" name="rating" value="4" />
-          <label for="star4" title="4 stars">&#9733;</label>
-
-          <input type="radio" id="star3" name="rating" value="3" />
-          <label for="star3" title="3 stars">&#9733;</label>
-
-          <input type="radio" id="star2" name="rating" value="2" />
-          <label for="star2" title="2 stars">&#9733;</label>
-
-          <input type="radio" id="star1" name="rating" value="1" />
-          <label for="star1" title="1 star">&#9733;</label>
-        </div>
-
-        <textarea placeholder="Write your feedback here..." rows="4" required></textarea>
+      <div id="review-form-container">
+        <h2>Leave Us a Review</h2>
+        <p>How would you rate your experience with RCDK & Complexity?</p>
         
-        <button type="submit" class="submit-btn">Submit Review</button>
-      </form>
+        <form class="feedback-form" id="reviewForm" onsubmit="submitReview(event)">
+          <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5" required />
+            <label for="star5" title="5 stars">&#9733;</label>
+
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label for="star4" title="4 stars">&#9733;</label>
+
+            <input type="radio" id="star3" name="rating" value="3" />
+            <label for="star3" title="3 stars">&#9733;</label>
+
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label for="star2" title="2 stars">&#9733;</label>
+
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label for="star1" title="1 star">&#9733;</label>
+          </div>
+
+          <input type="text" id="reviewerName" placeholder="Your Name" required style="width: 100%; max-width: 500px; padding: 10px; background: #121212; border: 1px solid #333; border-radius: 6px; color: #fff; font-size: 14px;" />
+          <textarea id="reviewerFeedback" placeholder="Write your feedback here..." rows="3" required></textarea>
+          
+          <button type="submit" class="submit-btn">Submit Review</button>
+        </form>
+      </div>
+
+      <div id="thank-you-message" style="display: none; color: #4CAF50; margin-bottom: 20px;">
+        <h3>Thank you for your review! 🎉</h3>
+        <p>Your review has been published below.</p>
+      </div>
+
+      <div class="reviews-display">
+        <h3>User Reviews</h3>
+        <div id="reviewsContainer" class="reviews-list">
+          <div class="review-card">
+            <div class="review-header">
+              <strong>Ruthvik</strong>
+              <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <p>Complexity is super fast and answers general knowledge questions perfectly!</p>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -234,11 +297,39 @@
     &copy; 2026 RCDK. All Rights Reserved.
   </footer>
 
+  <!-- Submission Handler Script -->
+  <script>
+    function submitReview(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('reviewerName').value;
+      const feedback = document.getElementById('reviewerFeedback').value;
+      const ratingInput = document.querySelector('input[name="rating"]:checked');
+      const rating = ratingInput ? parseInt(ratingInput.value) : 5;
+
+      const starsString = '&#9733;'.repeat(rating);
+
+      const reviewCard = document.createElement('div');
+      reviewCard.className = 'review-card';
+      reviewCard.innerHTML = `
+        <div class="review-header">
+          <strong>${name}</strong>
+          <span class="stars">${starsString}</span>
+        </div>
+        <p>${feedback}</p>
+      `;
+
+      document.getElementById('reviewsContainer').prepend(reviewCard);
+
+      document.getElementById('review-form-container').style.display = 'none';
+      document.getElementById('thank-you-message').style.display = 'block';
+    }
+  </script>
+
   <!-- Chatbase AI Chatbot (Complexity) -->
   <script>
   (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="y3lvhjKy4raCeK_L6rwof";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
   </script>
 
 </body>
-      </html>
-  
+      </html>            
