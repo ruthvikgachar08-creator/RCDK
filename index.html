@@ -66,7 +66,7 @@
     <div id="home" class="tab-content active">
       <div class="card">
         <h2>Welcome to RCDK</h2>
-        <p>RCDK is a digital portal focused on technology development, software innovation, and custom AI tools built by Ruthvik G Achar and team.</p>
+        <p>RCDK is a digital hub focused on modern technology exploration, software development, and interactive tools built by Ruthvik G Achar and team.</p>
       </div>
 
       <div class="card">
@@ -74,7 +74,7 @@
         <div class="review-grid" id="reviewGrid">
           <div class="review-card">
             <div class="stars">★★★★★</div>
-            <p>"The dark theme combined with Complexity AI makes browsing RCDK an awesome experience!"</p>
+            <p>"The clean UI dark theme combined with Complexity AI makes browsing RCDK an awesome experience!"</p>
             <span class="reviewer">- Tech Enthusiast</span>
           </div>
         </div>
@@ -98,7 +98,7 @@
     <div id="projects" class="tab-content">
       <div class="card">
         <h2>Our Projects</h2>
-        <p>1. RCDK Digital Hub Interface</p>
+        <p>1. RCDK Digital Hub Portal</p>
         <p>2. Complexity AI Assistant</p>
       </div>
     </div>
@@ -161,7 +161,7 @@
 
       const container = document.getElementById('chatMessages');
 
-      // User Message
+      // Add User Message
       const userDiv = document.createElement('div');
       userDiv.className = 'msg user-msg';
       userDiv.innerText = text;
@@ -169,7 +169,7 @@
       input.value = '';
       container.scrollTop = container.scrollHeight;
 
-      // Bot Thinking Message
+      // Add Bot Message
       const botDiv = document.createElement('div');
       botDiv.className = 'msg bot-msg';
       botDiv.innerText = "Thinking...";
@@ -178,9 +178,9 @@
 
       const q = text.toLowerCase();
 
-      // 1. Direct Local Answers for Creators, RCDK & Facts
+      // 1. DIRECT KNOWLEDGE ENGINE (Zero API Calls = Zero Errors)
       if (q.includes("created") || q.includes("creator") || q.includes("who made") || q.includes("founder") || q.includes("built")) {
-        botDiv.innerText = "Complexity AI was created for RCDK by Ruthvik G Achar, along with team members Chinmaya, Daiwik, and Kanishk.";
+        botDiv.innerText = "Complexity AI was created for RCDK by Ruthvik G Achar, alongside team members Chinmaya, Daiwik, and Kanishk.";
         container.scrollTop = container.scrollHeight;
         return;
       }
@@ -210,18 +210,17 @@
         return;
       }
       if (q.includes("raksha bandhan") || q.includes("gift")) {
-        botDiv.innerText = "Great Raksha Bandhan gifts include personalized keepsakes, customized jewelry or watches, gift hampers, electronics, or gift cards!";
+        botDiv.innerText = "Great Raksha Bandhan gifts include personalized keepsakes, customized watches or jewelry, chocolate hampers, gadgets, or gift cards!";
         container.scrollTop = container.scrollHeight;
         return;
       }
 
-      // 2. Open Search API Lookup (Zero CORS Blocks)
+      // 2. Wikipedia Search Engine (Allowed on All Mobile Networks)
       try {
-        // Clean query to pull primary subject
-        const cleanQuery = text.replace(/who is|what is|tell me about|where is/gi, '').trim();
-        const searchTarget = cleanQuery.length > 0 ? cleanQuery : text;
+        const target = text.replace(/who is|what is|tell me about|where is/gi, '').trim();
+        const searchQ = target.length > 0 ? target : text;
 
-        const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(searchTarget)}`);
+        const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(searchQ)}`);
         
         if (wikiRes.ok) {
           const wikiData = await wikiRes.json();
@@ -233,13 +232,11 @@
         }
       } catch (err) { }
 
-      // 3. Fallback Response
-      botDiv.innerText = `I am Complexity AI, built for RCDK by Ruthvik G Achar! I can answer questions about RCDK, team members, world facts, and general knowledge.`;
+      // 3. Clean Guaranteed Fallback
+      botDiv.innerText = `I am Complexity AI, built for RCDK by Ruthvik G Achar! Ask me about RCDK, team members, world facts, or gift ideas.`;
       container.scrollTop = container.scrollHeight;
     }
   </script>
 </body>
-  </html>    
-            
-
-    
+              </html>            
+                
