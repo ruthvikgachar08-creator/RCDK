@@ -254,7 +254,7 @@
 
       // Live AI Generation for ALL General Knowledge & Open Questions
       try {
-        const promptText = `You are Complexity AI, an intelligent AI built for RCDK by Ruthvik G Achar. Answer this query concisely: ${text}`;
+        const promptText = `You are Complexity AI, an intelligent AI built by the RCDK team. Answer this query concisely: ${text}`;
         
         // Direct open GET stream query
         const aiResponse = await fetch(`https://text.pollinations.ai/${encodeURIComponent(promptText)}?model=mistral&seed=${Math.floor(Math.random() * 1000)}`);
