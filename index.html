@@ -167,15 +167,31 @@
     </div>
   </main>
 
-  <script>
+  
+    <script>
     const SYSTEM_PROMPT = "You are Complexity, an AI assistant for RCDK. RCDK stands for: R = RUTHVIK G ACHAR (Creator & Founder), C = CHINMAYA (Developer's Teammate/Friend), D = DAIWIK (Developer's Teammate/Friend), K = KANISHK (Developer's Teammate/Friend). Ruthvik G Achar created and built RCDK.";
 
-    function switchTab(tabId, evt) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+    function switchTab(tabId, event) {
+      if (event) event.preventDefault();
       
-      document.getElementById(tabId).classList.add('active');
-      evt.target.classList.add('active');
+      // Hide all tabs
+      const allTabs = document.querySelectorAll('.tab-content');
+      allTabs.forEach(tab => tab.classList.remove('active'));
+      
+      // Remove active class from all nav buttons
+      const allNavs = document.querySelectorAll('.nav-link');
+      allNavs.forEach(link => link.classList.remove('active'));
+      
+      // Show selected tab
+      const targetTab = document.getElementById(tabId);
+      if (targetTab) {
+        targetTab.classList.add('active');
+      }
+      
+      // Highlight selected nav button
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+      }
     }
 
     function handleKey(e) {
@@ -227,6 +243,7 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            model: "openai",
             messages: [
               { role: "system", content: SYSTEM_PROMPT },
               { role: "user", content: text }
@@ -236,10 +253,12 @@
 
         const data = await response.json();
         
-        if (data.choices && data.choices[0].message.content) {
+        if (data && data.choices && data.choices[0] && data.choices[0].message) {
           botDiv.innerText = data.choices[0].message.content;
+        } else if (data.error) {
+          botDiv.innerText = "Error: " + (data.error.message || JSON.stringify(data.error));
         } else {
-          botDiv.innerText = "Error: Couldn't fetch response.";
+          botDiv.innerText = "Error: Unexpected response format.";
         }
       } catch (err) {
         botDiv.innerText = "Network Error: " + err.message;
@@ -247,6 +266,7 @@
       container.scrollTop = container.scrollHeight;
     }
   </script>
+              
 
 </body>
           </html>      
