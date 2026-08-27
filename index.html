@@ -13,7 +13,7 @@
     header h1 { color: #F8FAFC; font-size: 28px; letter-spacing: 1px; }
 
     nav { display: flex; justify-content: center; gap: 15px; background-color: #0F172A; padding: 15px; border-bottom: 1px solid #334155; flex-wrap: wrap; }
-    nav a { color: #94A3B8; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 6px; transition: all 0.3s; }
+    nav a { color: #94A3B8; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 6px; transition: all 0.3s; cursor: pointer; }
     nav a:hover, nav a.active { color: #ffffff; background-color: #2563EB; }
     
     main { flex: 1; max-width: 900px; margin: 0 auto; width: 100%; padding: 30px 20px; }
@@ -23,8 +23,8 @@
     .card { background-color: #1E293B; padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-top: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
     h2 { color: #06B6D4; margin-bottom: 15px; }
 
-    /* Complexity Dedicated Tab Styling */
-    .chat-container { display: flex; flex-direction: column; height: 500px; background-color: #1E293B; border-radius: 12px; border: 1px solid #334155; overflow: hidden; }
+    /* Dedicated Complexity AI Tab Styling */
+    .chat-container { display: flex; flex-direction: column; height: 500px; background-color: #1E293B; border-radius: 12px; border: 1px solid #334155; overflow: hidden; margin-top: 20px; }
     .chat-header { background-color: #2563EB; color: white; padding: 16px; font-weight: 700; font-size: 18px; text-align: center; }
     .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
     .msg { padding: 12px 16px; border-radius: 8px; max-width: 75%; line-height: 1.5; font-size: 14px; }
@@ -43,18 +43,18 @@
   </header>
 
   <nav>
-    <a href="#home" class="nav-link active" onclick="switchTab('home')">Home</a>
-    <a href="#about" class="nav-link" onclick="switchTab('about')">About</a>
-    <a href="#projects" class="nav-link" onclick="switchTab('projects')">Projects</a>
-    <a href="#contact" class="nav-link" onclick="switchTab('contact')">Contact Us</a>
-    <a href="#complexity" class="nav-link" onclick="switchTab('complexity')">Complexity</a>
+    <a class="nav-link active" onclick="switchTab('home', event)">Home</a>
+    <a class="nav-link" onclick="switchTab('about', event)">About</a>
+    <a class="nav-link" onclick="switchTab('projects', event)">Projects</a>
+    <a class="nav-link" onclick="switchTab('contact', event)">Contact Us</a>
+    <a class="nav-link" onclick="switchTab('complexity', event)">Complexity</a>
   </nav>
 
   <main>
     <div id="home" class="tab-content active">
       <div class="card">
         <h2>Welcome to RCDK</h2>
-        <p>Explore our projects, connect with us, or chat with Complexity AI directly inside the tabs!</p>
+        <p>Explore our projects, learn about our team, or switch to the Complexity tab to chat with our built-in AI assistant!</p>
       </div>
     </div>
 
@@ -83,7 +83,7 @@
       <div class="chat-container">
         <div class="chat-header">Complexity AI</div>
         <div class="chat-messages" id="chatMessages">
-          <div class="msg bot-msg">Hello! I am Complexity. How can I assist you today?</div>
+          <div class="msg bot-msg">Hello! I am Complexity. How can I help you today?</div>
         </div>
         <div class="chat-input-area">
           <input type="text" id="userInput" placeholder="Ask Complexity something..." onkeypress="handleKey(event)" />
@@ -94,15 +94,17 @@
   </main>
 
   <script>
-    const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
+    // Paste your Google Gemini API key inside the quotes below:
+    const GEMINI_API_KEY = "";
+    
     const SYSTEM_PROMPT = "You are Complexity, an AI assistant for RCDK. RCDK stands for: R = RUTHVIK G ACHAR (Creator & Founder), C = CHINMAYA (Developer's Teammate/Friend), D = DAIWIK (Developer's Teammate/Friend), K = KANISHK (Developer's Teammate/Friend). Ruthvik G Achar created and built RCDK.";
 
-    function switchTab(tabId) {
+    function switchTab(tabId, evt) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
       
       document.getElementById(tabId).classList.add('active');
-      event.target.classList.add('active');
+      evt.target.classList.add('active');
     }
 
     function handleKey(e) {
@@ -148,4 +150,5 @@
   </script>
 
 </body>
-</html>      
+</html>
+    
