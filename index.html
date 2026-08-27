@@ -57,6 +57,7 @@
     <p>Innovating Tech & Intelligent Systems</p>
   </header>
 
+  <!-- Navigation Bar -->
   <nav>
     <button class="nav-btn active" onclick="openTab(event, 'home')">Home</button>
     <button class="nav-btn" onclick="openTab(event, 'about')">About</button>
@@ -66,6 +67,7 @@
   </nav>
 
   <main>
+    <!-- Home Tab -->
     <div id="home" class="tab-content active">
       <div class="card">
         <h2>Welcome to RCDK</h2>
@@ -73,6 +75,7 @@
         <p>Feel free to explore our ongoing work, connect with our founding team, or open the <strong>Complexity</strong> tab to interact directly with our built-in custom AI assistant!</p>
       </div>
 
+      <!-- Review Section -->
       <div class="card">
         <h2>Community & User Reviews</h2>
         <p>See what visitors and users have to say about the RCDK platform and Complexity AI.</p>
@@ -95,6 +98,7 @@
           </div>
         </div>
 
+        <!-- Add Review Form -->
         <div style="margin-top: 25px;">
           <h3>Leave a Review</h3>
           <input type="text" id="reviewerName" placeholder="Your Name or Alias" />
@@ -104,22 +108,24 @@
       </div>
     </div>
 
+    <!-- About Tab -->
     <div id="about" class="tab-content">
       <div class="card">
         <h2>About RCDK</h2>
-        <p>RCDK was founded and created by <strong>Ruthvik G Achar, ChinmayaT, Daiwik Krishna, Kanishk Bhat</strong>. The team shares a vision of building sleek modern web environments and integrating practical artificial intelligence tools into everyday projects.</p>
+        <p>RCDK was founded and created by <strong>Ruthvik G Achar</strong> alongside core team members <strong>Chinmaya</strong>, <strong>Daiwik</strong>, and <strong>Kanishk</strong>. The team shares a vision of building sleek modern web environments and integrating practical artificial intelligence tools into everyday projects.</p>
       </div>
       <div class="card">
         <h2>Core Team Members</h2>
         <ul style="list-style: none; padding-left: 0; color: #CBD5E1;">
-          <li style="margin-bottom: 12px;">⚡ <strong>Ruthvik G Achar:</strong> Lead Web Framework Developer</li>
-          <li style="margin-bottom: 12px;">⚡ <strong>Chinmaya:</strong> Content Strategy & Technical Researcher</li>
-          <li style="margin-bottom: 12px;">⚡ <strong>Daiwik:</strong> Co-Developer and debugger</li>
-          <li style="margin-bottom: 12px;">⚡ <strong>Kanishk:</strong> Lead backend developer & Tester</li>
+          <li style="margin-bottom: 12px;">⚡ <strong>Ruthvik G Achar:</strong> Creator, Founder & Lead Web Developer</li>
+          <li style="margin-bottom: 12px;">⚡ <strong>Chinmaya:</strong> Co-Developer & Project Contributor</li>
+          <li style="margin-bottom: 12px;">⚡ <strong>Daiwik:</strong> Systems Integration & Testing</li>
+          <li style="margin-bottom: 12px;">⚡ <strong>Kanishk:</strong> Content Strategy & Technical Research</li>
         </ul>
       </div>
     </div>
 
+    <!-- Projects Tab -->
     <div id="projects" class="tab-content">
       <div class="card">
         <h2>Our Projects</h2>
@@ -135,6 +141,7 @@
       </div>
     </div>
 
+    <!-- Contact Tab -->
     <div id="contact" class="tab-content">
       <div class="card">
         <h2>Contact Us</h2>
@@ -146,11 +153,12 @@
       </div>
     </div>
 
+    <!-- Complexity AI Tab -->
     <div id="complexity" class="tab-content">
       <div class="chat-container">
         <div class="chat-header">Complexity AI</div>
         <div class="chat-messages" id="chatMessages">
-          <div class="msg bot-msg">Hello! I am Complexity, the AI assistant for RCDK. How can I assist you today?</div>
+          <div class="msg bot-msg">Hello! I am Complexity, created for RCDK by Ruthvik G Achar. How can I assist you today?</div>
         </div>
         <div class="chat-input-area">
           <input type="text" id="userInput" placeholder="Ask Complexity something..." onkeypress="handleKey(event)" />
@@ -161,7 +169,6 @@
   </main>
 
   <script>
-          
     function openTab(evt, tabName) {
       const contents = document.getElementsByClassName("tab-content");
       for (let i = 0; i < contents.length; i++) {
@@ -199,19 +206,6 @@
       alert('Review posted successfully!');
     }
 
-    // Smart Local Knowledge Engine (No Network Errors)
-    const KNOWLEDGE_BASE = [
-      { keywords: ["capital", "india"], answer: "The capital of India is New Delhi." },
-      { keywords: ["creator", "founder", "created", "built", "who made"], answer: "RCDK was created and founded by teammates and close friends  Ruthvik G Achar, Chinmaya T, Daiwik Krishna, Kanishk Bhat." },
-      { keywords: ["ruthvik"], answer: "Ruthvik G Achar is a primary team member as the Lead Framework Developer of the RCDK platform." },
-      { keywords: ["chinmaya"], answer: "Chinmaya is a core team member working as a researcher at RCDK." },
-      { keywords: ["daiwik"], answer: "Daiwik is a key team member at RCDK focusing on testing and debugging." },
-      { keywords: ["kanishk"], answer: "Kanishk is an important team member at RCDK providing the working code for RCDK projects." },
-      { keywords: ["what is rcdk", "stand for", "rcdk"], answer: "RCDK stands for the names of colleagues and best friends: R = Ruthvik G Achar, C = Chinmaya T, D = Daiwik Krishna, and K = Kanishk Bhat." },
-      { keywords: ["hi", "hello", "hey"], answer: "Hello! I am Complexity AI, your dedicated assistant for RCDK. How can I help you today?" },
-      { keywords: ["who are you", "what are you"], answer: "I am Complexity AI, an intelligent conversational assistant created specifically for the RCDK web application." }
-    ];
-
     async function sendMessage() {
       const input = document.getElementById('userInput');
       const text = input.value.trim();
@@ -235,40 +229,56 @@
       container.scrollTop = container.scrollHeight;
 
       const lowerText = text.toLowerCase();
-      let foundAnswer = false;
 
-      // Check Local Knowledge Base First
-      for (let item of KNOWLEDGE_BASE) {
-        if (item.keywords.every(k => lowerText.includes(k))) {
-          botDiv.innerText = item.answer;
-          foundAnswer = true;
-          break;
-        }
+      // Instant exact local answers for RCDK queries
+      if (lowerText.includes("rcdk") || lowerText.includes("creator") || lowerText.includes("founder") || lowerText.includes("ruthvik")) {
+        botDiv.innerText = "RCDK was created and founded by Ruthvik G Achar alongside team members Chinmaya, Daiwik, and Kanishk.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+      if (lowerText.includes("chinmaya")) {
+        botDiv.innerText = "Chinmaya is a core team member and Co-Developer working on RCDK with Ruthvik G Achar.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+      if (lowerText.includes("daiwik")) {
+        botDiv.innerText = "Daiwik is a core team member at RCDK focusing on systems integration and testing.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+      if (lowerText.includes("kanishk")) {
+        botDiv.innerText = "Kanishk is a core team member at RCDK focusing on technical research and content strategy.";
+        container.scrollTop = container.scrollHeight;
+        return;
       }
 
-      // If not matched, query Wikipedia Search API directly
-      if (!foundAnswer) {
-        try {
+      // Live AI Generation for ALL General Knowledge & Open Questions
+      try {
+        const promptText = `You are Complexity AI, an intelligent AI built for RCDK by Ruthvik G Achar. Answer this query concisely: ${text}`;
+        
+        // Direct open GET stream query
+        const aiResponse = await fetch(`https://text.pollinations.ai/${encodeURIComponent(promptText)}?model=mistral&seed=${Math.floor(Math.random() * 1000)}`);
+        
+        if (aiResponse.ok) {
+          const resultText = await aiResponse.text();
+          botDiv.innerText = resultText.trim();
+        } else {
+          // Backup Wikipedia API lookup
           const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(text)}`);
           if (wikiRes.ok) {
             const wikiData = await wikiRes.json();
-            if (wikiData.extract) {
-              botDiv.innerText = wikiData.extract;
-              foundAnswer = true;
-            }
+            botDiv.innerText = wikiData.extract || "I am Complexity AI. Ask me about RCDK or any general question!";
+          } else {
+            botDiv.innerText = "Complexity AI is processing high traffic. Please try asking your question again!";
           }
-        } catch (e) { }
-      }
-
-      // Default smart fallback if query not recognized
-      if (!foundAnswer) {
-        botDiv.innerText = `Complexity AI query received: "${text}". Ask about RCDK, Ruthvik, Chinmaya, Daiwik, Kanishk, or general facts!`;
+        }
+      } catch (err) {
+        botDiv.innerText = "Complexity AI is processing high traffic. Please try asking your question again!";
       }
 
       container.scrollTop = container.scrollHeight;
     }
   </script>
-  
+
 </body>
-            </html>      
-      
+              </html>
