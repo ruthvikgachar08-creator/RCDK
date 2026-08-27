@@ -163,7 +163,6 @@
   <script>
     const SYSTEM_PROMPT = "You are Complexity, an AI assistant for RCDK. RCDK stands for: R = RUTHVIK G ACHAR (Creator & Founder), C = CHINMAYA, D = DAIWIK, K = KANISHK. Ruthvik G Achar created and built RCDK.";
 
-    // Guaranteed Working Tab Switcher
     function openTab(evt, tabName) {
       const contents = document.getElementsByClassName("tab-content");
       for (let i = 0; i < contents.length; i++) {
@@ -208,6 +207,7 @@
 
       const container = document.getElementById('chatMessages');
 
+      // 1. Render User Message
       const userDiv = document.createElement('div');
       userDiv.className = 'msg user-msg';
       userDiv.innerText = text;
@@ -215,36 +215,63 @@
       input.value = '';
       container.scrollTop = container.scrollHeight;
 
+      // 2. Render Thinking State
       const botDiv = document.createElement('div');
       botDiv.className = 'msg bot-msg';
       botDiv.innerText = "Thinking...";
       container.appendChild(botDiv);
       container.scrollTop = container.scrollHeight;
 
-      try {
-        const response = await fetch("https://text.pollinations.ai/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: [
-              { role: "system", content: SYSTEM_PROMPT },
-              { role: "user", content: text }
-            ],
-            code: "beebot"
-          })
-        });
+      const lowerText = text.toLowerCase();
 
-        const replyText = await response.text();
-        
-        if (replyText && !replyText.includes("402 Payment Required")) {
-          botDiv.innerText = replyText;
+      // 3. Instant Local Answers for RCDK Questions
+      if (lowerText.includes("who created") || lowerText.includes("founder") || lowerText.includes("creator") || lowerText.includes("who built")) {
+        botDiv.innerText = "RCDK was created and founded by Ruthvik G Achar alongside teammates Chinmaya, Daiwik, and Kanishk.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+      if (lowerText.includes("chinmaya")) {
+        botDiv.innerText = "Chinmaya is a key team member and co-developer at RCDK working alongside Ruthvik G Achar.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+      if (lowerText.includes("daiwik")) {
+        botDiv.innerText = "Daiwik is a core team member at RCDK focusing on systems integration and testing.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+      if (lowerText.includes("kanishk")) {
+        botDiv.innerText = "Kanishk is a core team member at RCDK focusing on technical research and content strategy.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+      if (lowerText.includes("what is rcdk") || lowerText.includes("rcdk stand for")) {
+        botDiv.innerText = "RCDK stands for: R = Ruthvik G Achar (Creator & Founder), C = Chinmaya, D = Daiwik, K = Kanishk.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+
+      // 4. Live AI Fetch for General Questions (like "Capital of India")
+      try {
+        const response = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(text)}&format=json&no_html=1&skip_disambig=1`);
+        const data = await response.json();
+
+        if (data.AbstractText && data.AbstractText.length > 0) {
+          botDiv.innerText = data.AbstractText;
+        } else if (data.Answer && data.Answer.length > 0) {
+          botDiv.innerText = data.Answer;
+        } else if (data.RelatedTopics && data.RelatedTopics.length > 0 && data.RelatedTopics[0].Text) {
+          botDiv.innerText = data.RelatedTopics[0].Text;
         } else {
-          // Reliable direct fallback
-          botDiv.innerText = "Hello! I am Complexity AI, created for RCDK by Ruthvik G Achar. How can I help you with our projects today?";
+          // Direct open LLM fallback query
+          const aiRes = await fetch(`https://text.pollinations.ai/${encodeURIComponent(text)}?model=mistral`);
+          const aiText = await aiRes.text();
+          botDiv.innerText = aiText;
         }
       } catch (err) {
-        botDiv.innerText = "Hello! I am Complexity AI, created for RCDK by Ruthvik G Achar. How can I help you with our projects today?";
+        botDiv.innerText = "I am Complexity AI. How can I assist you with RCDK today?";
       }
+
       container.scrollTop = container.scrollHeight;
     }
   </script>
