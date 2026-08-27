@@ -98,8 +98,7 @@
       </div>
     </div>
   </main>
-
-  <script>
+    <script>
     const SYSTEM_PROMPT = "You are Complexity, an AI assistant for RCDK. RCDK stands for: R = RUTHVIK G ACHAR (Creator & Founder), C = CHINMAYA (Developer's Teammate/Friend), D = DAIWIK (Developer's Teammate/Friend), K = KANISHK (Developer's Teammate/Friend). Ruthvik G Achar created and built RCDK.";
 
     function switchTab(tabId, evt) {
@@ -135,14 +134,27 @@
       container.scrollTop = container.scrollHeight;
 
       try {
-        // Free open endpoint - no API key needed, zero restrictions
-        const fullPrompt = `${SYSTEM_PROMPT}\n\nUser Question: ${text}`;
-        const response = await fetch(`https://text.pollinations.ai/${encodeURIComponent(fullPrompt)}`);
-        const replyText = await response.text();
+        // Free open endpoint - no key required, completely unrestricted
+        const response = await fetch("https://gen.pollinations.ai/v1/chat/completions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [
+              { role: "system", content: SYSTEM_PROMPT },
+              { role: "user", content: text }
+            ]
+          })
+        });
+
+        const data = await response.json();
         
-        botDiv.innerText = replyText;
+        if (data.choices && data.choices[0].message.content) {
+          botDiv.innerText = data.choices[0].message.content;
+        } else {
+          botDiv.innerText = "Error: Couldn't fetch response.";
+        }
       } catch (err) {
-        botDiv.innerText = "Error connecting to AI service. Please try again.";
+        botDiv.innerText = "Network Error: " + err.message;
       }
       container.scrollTop = container.scrollHeight;
     }
