@@ -4,94 +4,105 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RCDK</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-    body { background-color: #121212; color: #ffffff; display: flex; flex-direction: column; min-height: 100vh; }
-    header { background-color: #800000; padding: 20px; text-align: center; font-size: 24px; font-weight: 600; }
-    nav { display: flex; justify-content: center; gap: 20px; background-color: #1a1a1a; padding: 10px; }
-    nav a { color: #ffffff; text-decoration: none; transition: color 0.3s; }
-    nav a:hover { color: #800000; }
-    main { flex: 1; padding: 40px 20px; max-width: 1000px; margin: 0 auto; width: 100%; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: #0F172A; color: #F8FAFC; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    header { background-color: #1E293B; padding: 20px; text-align: center; border-bottom: 2px solid #2563EB; }
+    header h1 { color: #F8FAFC; font-size: 28px; letter-spacing: 1px; }
 
-    .hero { text-align: center; margin-bottom: 40px; }
-    .hero h1 { font-size: 36px; color: #800000; margin-bottom: 10px; }
+    nav { display: flex; justify-content: center; gap: 15px; background-color: #0F172A; padding: 15px; border-bottom: 1px solid #334155; flex-wrap: wrap; }
+    nav a { color: #94A3B8; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 6px; transition: all 0.3s; }
+    nav a:hover, nav a.active { color: #ffffff; background-color: #2563EB; }
+    
+    main { flex: 1; max-width: 900px; margin: 0 auto; width: 100%; padding: 30px 20px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    /* Custom Chatbot Floating Widget */
-    #chat-widget-button {
-      position: fixed; bottom: 20px; right: 20px;
-      background-color: #800000; color: white;
-      border: none; border-radius: 50%; width: 60px; height: 60px;
-      font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 1000;
-    }
-    #chat-box {
-      display: none; position: fixed; bottom: 90px; right: 20px;
-      width: 340px; height: 450px; background-color: #1e1e1e;
-      border: 1px solid #333; border-radius: 12px;
-      flex-direction: column; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.6); z-index: 1000;
-    }
-    .chat-header {
-      background-color: #800000; padding: 12px 16px;
-      display: flex; justify-content: space-between; align-items: center; font-weight: 600;
-    }
-    .chat-header button { background: none; border: none; color: white; font-size: 18px; cursor: pointer; }
-    .chat-messages {
-      flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 14px;
-    }
-    .msg { padding: 8px 12px; border-radius: 8px; max-width: 80%; line-height: 1.4; }
-    .user-msg { background-color: #800000; color: white; align-self: flex-end; }
-    .bot-msg { background-color: #2a2a2a; color: #ddd; align-self: flex-start; }
-    .chat-input-area { display: flex; border-top: 1px solid #333; padding: 8px; background-color: #141414; }
-    .chat-input-area input {
-      flex: 1; padding: 8px 12px; background: #222; border: 1px solid #444; color: white; border-radius: 6px; outline: none;
-    }
-    .chat-input-area button {
-      background: #800000; border: none; color: white; padding: 8px 14px; margin-left: 6px; border-radius: 6px; cursor: pointer;
-    }
+    .card { background-color: #1E293B; padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-top: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+    h2 { color: #06B6D4; margin-bottom: 15px; }
+
+    /* Complexity Dedicated Tab Styling */
+    .chat-container { display: flex; flex-direction: column; height: 500px; background-color: #1E293B; border-radius: 12px; border: 1px solid #334155; overflow: hidden; }
+    .chat-header { background-color: #2563EB; color: white; padding: 16px; font-weight: 700; font-size: 18px; text-align: center; }
+    .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .msg { padding: 12px 16px; border-radius: 8px; max-width: 75%; line-height: 1.5; font-size: 14px; }
+    .user-msg { background-color: #2563EB; color: white; align-self: flex-end; }
+    .bot-msg { background-color: #334155; color: #F8FAFC; align-self: flex-start; }
+    .chat-input-area { display: flex; padding: 12px; background-color: #0F172A; border-top: 1px solid #334155; }
+    .chat-input-area input { flex: 1; padding: 12px; background: #1E293B; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; }
+    .chat-input-area button { background: #06B6D4; color: #0F172A; border: none; font-weight: 700; padding: 12px 20px; margin-left: 10px; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
+    .chat-input-area button:hover { background: #22d3ee; }
   </style>
 </head>
 <body>
 
-  <header>RCDK</header>
+  <header>
+    <h1>RCDK</h1>
+  </header>
+
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
+    <a href="#home" class="nav-link active" onclick="switchTab('home')">Home</a>
+    <a href="#about" class="nav-link" onclick="switchTab('about')">About</a>
+    <a href="#projects" class="nav-link" onclick="switchTab('projects')">Projects</a>
+    <a href="#contact" class="nav-link" onclick="switchTab('contact')">Contact Us</a>
+    <a href="#complexity" class="nav-link" onclick="switchTab('complexity')">Complexity</a>
   </nav>
 
   <main>
-    <section class="hero">
-      <h1>Welcome to RCDK</h1>
-      <p>Unlimited AI assistant ready to help!</p>
-    </section>
+    <div id="home" class="tab-content active">
+      <div class="card">
+        <h2>Welcome to RCDK</h2>
+        <p>Explore our projects, connect with us, or chat with Complexity AI directly inside the tabs!</p>
+      </div>
+    </div>
+
+    <div id="about" class="tab-content">
+      <div class="card">
+        <h2>About Us</h2>
+        <p>RCDK was created and founded by Ruthvik G Achar alongside teammates Chinmaya, Daiwik, and Kanishk.</p>
+      </div>
+    </div>
+
+    <div id="projects" class="tab-content">
+      <div class="card">
+        <h2>Our Projects</h2>
+        <p>Details about ongoing web and development projects will be displayed here.</p>
+      </div>
+    </div>
+
+    <div id="contact" class="tab-content">
+      <div class="card">
+        <h2>Contact Us</h2>
+        <p>Reach out to the RCDK team for inquiries and feedback.</p>
+      </div>
+    </div>
+
+    <div id="complexity" class="tab-content">
+      <div class="chat-container">
+        <div class="chat-header">Complexity AI</div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg bot-msg">Hello! I am Complexity. How can I assist you today?</div>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" id="userInput" placeholder="Ask Complexity something..." onkeypress="handleKey(event)" />
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <!-- Floating Chatbot Button -->
-  <button id="chat-widget-button" onclick="toggleChat()">💬</button>
-
-  <!-- Chat Window -->
-  <div id="chat-box">
-    <div class="chat-header">
-      <span>Complexity AI</span>
-      <button onclick="toggleChat()">✕</button>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="msg bot-msg">Hello! I am Complexity. How can I help you today?</div>
-    </div>
-    <div class="chat-input-area">
-      <input type="text" id="userInput" placeholder="Ask Complexity..." onkeypress="handleKey(event)" />
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
-
   <script>
-    // Paste your Google Gemini API key inside the quotes below:
-    const GEMINI_API_KEY = "AQ.Ab8RN6KsIzGqW-36QmwxJ9ztni-srCCRxpEZOhO3dNAtuazp6w";
-
+    const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
     const SYSTEM_PROMPT = "You are Complexity, an AI assistant for RCDK. RCDK stands for: R = RUTHVIK G ACHAR (Creator & Founder), C = CHINMAYA (Developer's Teammate/Friend), D = DAIWIK (Developer's Teammate/Friend), K = KANISHK (Developer's Teammate/Friend). Ruthvik G Achar created and built RCDK.";
 
-    function toggleChat() {
-      const chatBox = document.getElementById('chat-box');
-      chatBox.style.display = (chatBox.style.display === 'flex') ? 'none' : 'flex';
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
     }
 
     function handleKey(e) {
@@ -105,7 +116,6 @@
 
       const container = document.getElementById('chatMessages');
 
-      // User Message
       const userDiv = document.createElement('div');
       userDiv.className = 'msg user-msg';
       userDiv.innerText = text;
@@ -113,7 +123,6 @@
       input.value = '';
       container.scrollTop = container.scrollHeight;
 
-      // Loading indicator
       const botDiv = document.createElement('div');
       botDiv.className = 'msg bot-msg';
       botDiv.innerText = "Thinking...";
@@ -125,9 +134,7 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            contents: [
-              { role: 'user', parts: [{ text: SYSTEM_PROMPT + "\n\nUser Question: " + text }] }
-            ]
+            contents: [{ role: 'user', parts: [{ text: SYSTEM_PROMPT + "\n\nUser Question: " + text }] }]
           })
         });
         const data = await response.json();
@@ -141,4 +148,4 @@
   </script>
 
 </body>
-  </html>
+</html>      
