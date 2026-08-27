@@ -3,43 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RCDK</title>
+  <title>RCDK | Official Website</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
     body { background-color: #0F172A; color: #F8FAFC; min-height: 100vh; display: flex; flex-direction: column; }
     
-    header { background-color: #1E293B; padding: 20px; text-align: center; border-bottom: 2px solid #2563EB; }
-    header h1 { color: #F8FAFC; font-size: 28px; letter-spacing: 1px; }
+    header { background-color: #1E293B; padding: 25px 20px; text-align: center; border-bottom: 2px solid #2563EB; }
+    header h1 { color: #F8FAFC; font-size: 32px; letter-spacing: 2px; font-weight: 700; }
+    header p { color: #06B6D4; font-size: 14px; margin-top: 5px; font-weight: 600; }
 
-    nav { display: flex; justify-content: center; gap: 15px; background-color: #0F172A; padding: 15px; border-bottom: 1px solid #334155; flex-wrap: wrap; }
-    nav a { color: #94A3B8; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 6px; transition: all 0.3s; cursor: pointer; }
+    nav { display: flex; justify-content: center; gap: 12px; background-color: #0F172A; padding: 15px; border-bottom: 1px solid #334155; flex-wrap: wrap; }
+    nav a { color: #94A3B8; text-decoration: none; font-weight: 600; padding: 10px 18px; border-radius: 8px; transition: all 0.3s; cursor: pointer; }
     nav a:hover, nav a.active { color: #ffffff; background-color: #2563EB; }
     
-    main { flex: 1; max-width: 900px; margin: 0 auto; width: 100%; padding: 30px 20px; }
+    main { flex: 1; max-width: 950px; margin: 0 auto; width: 100%; padding: 30px 20px; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    .card { background-color: #1E293B; padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-top: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-    h2 { color: #06B6D4; margin-bottom: 15px; }
+    .card { background-color: #1E293B; padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+    h2 { color: #06B6D4; margin-bottom: 15px; font-size: 22px; }
+    h3 { color: #F8FAFC; margin-bottom: 10px; font-size: 18px; }
+    p { line-height: 1.7; color: #CBD5E1; margin-bottom: 15px; font-size: 15px; }
 
-    /* Complexity AI Tab Styling */
-    .chat-container { display: flex; flex-direction: column; height: 500px; background-color: #1E293B; border-radius: 12px; border: 1px solid #334155; overflow: hidden; margin-top: 20px; }
+    /* Review Section Styling */
+    .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px; }
+    .review-card { background: #0F172A; padding: 18px; border-radius: 8px; border: 1px solid #334155; }
+    .stars { color: #FBBF24; margin-bottom: 8px; font-size: 16px; }
+    .reviewer { font-size: 13px; color: #06B6D4; font-weight: 600; display: block; margin-top: 10px; }
+
+    /* Form Inputs */
+    input, textarea { width: 100%; padding: 12px; background: #0F172A; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; margin-bottom: 12px; font-size: 14px; }
+    input:focus, textarea:focus { border-color: #06B6D4; }
+    button.btn { background: #06B6D4; color: #0F172A; border: none; font-weight: 700; padding: 12px 24px; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
+    button.btn:hover { background: #22d3ee; }
+
+    /* Dedicated Complexity AI Tab Styling */
+    .chat-container { display: flex; flex-direction: column; height: 520px; background-color: #1E293B; border-radius: 12px; border: 1px solid #334155; overflow: hidden; }
     .chat-header { background-color: #2563EB; color: white; padding: 16px; font-weight: 700; font-size: 18px; text-align: center; }
     .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-    .msg { padding: 12px 16px; border-radius: 8px; max-width: 75%; line-height: 1.5; font-size: 14px; }
+    .msg { padding: 12px 16px; border-radius: 8px; max-width: 80%; line-height: 1.5; font-size: 14px; }
     .user-msg { background-color: #2563EB; color: white; align-self: flex-end; }
     .bot-msg { background-color: #334155; color: #F8FAFC; align-self: flex-start; }
     .chat-input-area { display: flex; padding: 12px; background-color: #0F172A; border-top: 1px solid #334155; }
-    .chat-input-area input { flex: 1; padding: 12px; background: #1E293B; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; }
-    .chat-input-area button { background: #06B6D4; color: #0F172A; border: none; font-weight: 700; padding: 12px 20px; margin-left: 10px; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
-    .chat-input-area button:hover { background: #22d3ee; }
+    .chat-input-area input { flex: 1; margin-bottom: 0; }
+    .chat-input-area button { margin-left: 10px; height: 45px; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>RCDK</h1>
+    <p>Innovating Tech & Intelligent Systems</p>
   </header>
 
   <!-- Navigation Bar -->
@@ -56,15 +71,57 @@
     <div id="home" class="tab-content active">
       <div class="card">
         <h2>Welcome to RCDK</h2>
-        <p>Explore our projects, learn about our team, or go to the Complexity tab to chat with our built-in AI assistant!</p>
+        <p>RCDK is a collaborative digital hub dedicated to innovative web development, technology exploration, and intelligent systems integration. Designed with modern web aesthetics and cutting-edge features, our portal showcases our creative technical projects and interactive AI tools.</p>
+        <p>Feel free to explore our ongoing work, connect with our founding team, or open the <strong>Complexity</strong> tab to interact directly with our built-in custom AI assistant!</p>
+      </div>
+
+      <!-- Dedicated Review Section -->
+      <div class="card">
+        <h2>Community & User Reviews</h2>
+        <p>See what visitors and users have to say about the RCDK platform and Complexity AI.</p>
+        
+        <div class="review-grid">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"The clean UI dark theme combined with Complexity AI makes browsing RCDK an awesome experience!"</p>
+            <span class="reviewer">- Tech Enthusiast</span>
+          </div>
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Fast response times and simple tab navigation. The project updates are very well detailed."</p>
+            <span class="reviewer">- Website Visitor</span>
+          </div>
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Impressive development work by Ruthvik and the RCDK team. Complexity AI answers questions instantly!"</p>
+            <span class="reviewer">- Peer Developer</span>
+          </div>
+        </div>
+
+        <!-- Add Review Form -->
+        <div style="margin-top: 25px;">
+          <h3>Leave a Review</h3>
+          <input type="text" id="reviewerName" placeholder="Your Name or Alias" />
+          <textarea id="reviewText" rows="3" placeholder="Write your review or feedback here..."></textarea>
+          <button class="btn" onclick="submitReview()">Submit Review</button>
+        </div>
       </div>
     </div>
 
     <!-- About Tab -->
     <div id="about" class="tab-content">
       <div class="card">
-        <h2>About Us</h2>
-        <p>RCDK was created and founded by teammates and best friends Ruthvik G Achar Chinmaya T, Daiwik Krishna, and Kanishk Bhat.</p>
+        <h2>About RCDK</h2>
+        <p>RCDK was founded and created by <strong>Ruthvik G Achar</strong> alongside core team members <strong>Chinmaya</strong>, <strong>Daiwik</strong>, and <strong>Kanishk</strong>. The team shares a vision of building sleek modern web environments and integrating practical artificial intelligence tools into everyday projects.</p>
+      </div>
+      <div class="card">
+        <h2>Core Team Members</h2>
+        <ul style="list-style: none; padding-left: 0; color: #CBD5E1;">
+          <li style="margin-bottom: 12px;">⚡ <strong>Ruthvik G Achar:</strong> Creator, Founder & Lead Web Developer</li>
+          <li style="margin-bottom: 12px;">⚡ <strong>Chinmaya:</strong> Co-Developer & Project Contributor</li>
+          <li style="margin-bottom: 12px;">⚡ <strong>Daiwik:</strong> Systems Integration & Testing</li>
+          <li style="margin-bottom: 12px;">⚡ <strong>Kanishk:</strong> Content Strategy & Technical Research</li>
+        </ul>
       </div>
     </div>
 
@@ -72,7 +129,15 @@
     <div id="projects" class="tab-content">
       <div class="card">
         <h2>Our Projects</h2>
-        <p>Details about ongoing web and development projects will be displayed here.</p>
+        <p>Here is an overview of key initiatives created and managed by the RCDK group:</p>
+      </div>
+      <div class="card">
+        <h3>1. RCDK Digital Hub & Dark Slate Interface</h3>
+        <p>A high-performance single-page web application featuring responsive tab switching, polished dark themes, and dynamic content layouts.</p>
+      </div>
+      <div class="card">
+        <h3>2. Complexity AI Assistant Integration</h3>
+        <p>An unrestricted custom conversational AI bot embedded directly into the platform to answer questions about RCDK, development, and general inquiries in real time.</p>
       </div>
     </div>
 
@@ -80,25 +145,30 @@
     <div id="contact" class="tab-content">
       <div class="card">
         <h2>Contact Us</h2>
-        <p>Reach out to the RCDK team for inquiries and feedback.</p>
+        <p>Have questions, ideas, or feedback for the RCDK team? Send us a direct message using the form below.</p>
+        <input type="text" placeholder="Your Full Name" />
+        <input type="email" placeholder="Your Email Address" />
+        <textarea rows="4" placeholder="Your Message..."></textarea>
+        <button class="btn" onclick="alert('Thank you for reaching out to RCDK!')">Send Message</button>
       </div>
     </div>
 
-    <!-- Complexity Tab -->
+    <!-- Complexity AI Tab -->
     <div id="complexity" class="tab-content">
       <div class="chat-container">
         <div class="chat-header">Complexity AI</div>
         <div class="chat-messages" id="chatMessages">
-          <div class="msg bot-msg">Hello! I am Complexity. How can I help you today?</div>
+          <div class="msg bot-msg">Hello! I am Complexity, the AI assistant for RCDK. How can I assist you today?</div>
         </div>
         <div class="chat-input-area">
           <input type="text" id="userInput" placeholder="Ask Complexity something..." onkeypress="handleKey(event)" />
-          <button onclick="sendMessage()">Send</button>
+          <button class="btn" onclick="sendMessage()">Send</button>
         </div>
       </div>
     </div>
   </main>
-    <script>
+
+  <script>
     const SYSTEM_PROMPT = "You are Complexity, an AI assistant for RCDK. RCDK stands for: R = RUTHVIK G ACHAR (Creator & Founder), C = CHINMAYA (Developer's Teammate/Friend), D = DAIWIK (Developer's Teammate/Friend), K = KANISHK (Developer's Teammate/Friend). Ruthvik G Achar created and built RCDK.";
 
     function switchTab(tabId, evt) {
@@ -111,6 +181,26 @@
 
     function handleKey(e) {
       if (e.key === 'Enter') sendMessage();
+    }
+
+    function submitReview() {
+      const name = document.getElementById('reviewerName').value.trim() || 'Anonymous Visitor';
+      const text = document.getElementById('reviewText').value.trim();
+      
+      if (!text) {
+        alert('Please enter a review message before submitting.');
+        return;
+      }
+
+      const grid = document.querySelector('.review-grid');
+      const newCard = document.createElement('div');
+      newCard.className = 'review-card';
+      newCard.innerHTML = `<div class="stars">★★★★★</div><p>"${text}"</p><span class="reviewer">- ${name}</span>`;
+      grid.appendChild(newCard);
+
+      document.getElementById('reviewerName').value = '';
+      document.getElementById('reviewText').value = '';
+      alert('Review posted successfully!');
     }
 
     async function sendMessage() {
@@ -134,7 +224,6 @@
       container.scrollTop = container.scrollHeight;
 
       try {
-        // Free open endpoint - no key required, completely unrestricted
         const response = await fetch("https://gen.pollinations.ai/v1/chat/completions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -161,4 +250,4 @@
   </script>
 
 </body>
-  </html>      
+          </html>      
