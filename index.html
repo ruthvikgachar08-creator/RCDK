@@ -242,7 +242,96 @@
       container.scrollTop = container.scrollHeight;
     }
   </script>
-  <script src="//code.tidio.co/zdlqyytwbogbxaopltwe4ky5phvji0ps.js" async></script>
+  
+  <!-- RCDK Smart Assistant Widget -->
+<div id="rcdk-chat-bubble" onclick="toggleRcdkChat()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #2563EB; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999;">
+  💬
+</div>
+
+<div id="rcdk-chat-window" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; height: 420px; background: #0F172A; border: 1px solid #334155; border-radius: 12px; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 9999; font-family: sans-serif; overflow: hidden;">
+  <div style="background: #1E293B; padding: 12px 16px; color: white; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155;">
+    <span>RCDK AI Assistant</span>
+    <span onclick="toggleRcdkChat()" style="cursor: pointer; font-size: 18px; color: #94A3B8;">✖</span>
+  </div>
+  
+  <div id="rcdk-chat-messages" style="flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+    <div style="background: #334155; color: white; padding: 8px 12px; border-radius: 8px; max-width: 80%; align-self: flex-start; font-size: 14px;">
+      Hello! Welcome to RCDK. How can I help you today?
+    </div>
+  </div>
+
+  <div style="padding: 10px; background: #1E293B; display: flex; gap: 6px; border-top: 1px solid #334155;">
+    <input type="text" id="rcdk-user-input" placeholder="Ask a question..." onkeypress="handleRcdkKeyPress(event)" style="flex: 1; padding: 8px 12px; background: #0F172A; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; font-size: 14px;">
+    <button onclick="sendRcdkMessage()" style="background: #2563EB; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Send</button>
+  </div>
+</div>
+
+<script>
+  function toggleRcdkChat() {
+    const win = document.getElementById('rcdk-chat-window');
+    win.style.display = win.style.display === 'none' || win.style.display === '' ? 'flex' : 'none';
+  }
+
+  function handleRcdkKeyPress(event) {
+    if (event.key === 'Enter') sendRcdkMessage();
+  }
+
+  function sendRcdkMessage() {
+    const input = document.getElementById('rcdk-user-input');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    addRcdkMessage(msg, 'user');
+    input.value = '';
+
+    setTimeout(() => {
+      const botReply = getRcdkBotReply(msg.toLowerCase());
+      addRcdkMessage(botReply, 'bot');
+    }, 400);
+  }
+
+  function addRcdkMessage(text, sender) {
+    const box = document.getElementById('rcdk-chat-messages');
+    const bubble = document.createElement('div');
+    bubble.style.padding = '8px 12px';
+    bubble.style.borderRadius = '8px';
+    bubble.style.maxWidth = '80%';
+    bubble.style.fontSize = '14px';
+    
+    if (sender === 'user') {
+      bubble.style.background = '#2563EB';
+      bubble.style.color = 'white';
+      bubble.style.alignSelf = 'flex-end';
+    } else {
+      bubble.style.background = '#334155';
+      bubble.style.color = 'white';
+      bubble.style.alignSelf = 'flex-start';
+    }
+    
+    bubble.innerText = text;
+    box.appendChild(bubble);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function getRcdkBotReply(input) {
+    // Custom Knowledge Base - Matches keywords to answers
+    if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
+      return "Hello! What would you like to know about RCDK?";
+    }
+    if (input.includes('rcdk') || input.includes('about') || input.includes('what is')) {
+      return "RCDK is an interactive web platform designed to present project details, technical features, and system resources clearly.";
+    }
+    if (input.includes('contact') || input.includes('email') || input.includes('reach')) {
+      return "You can reach out to the project team directly through the Contact section on this site.";
+    }
+    if (input.includes('help') || input.includes('feature')) {
+      return "I can answer questions about the site layout, project goals, contact information, and technical details!";
+    }
+    
+    // Default reply if query doesn't match a specific keyword
+    return "Thanks for reaching out! For specific questions regarding RCDK, feel free to ask about our project details, features, or contact options.";
+  }
+</script>
 </body>
               </html>            
                 
