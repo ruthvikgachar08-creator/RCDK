@@ -3,335 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RCDK | Official Website</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>RCDK Project</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: #0F172A; color: #F8FAFC; min-height: 100vh; display: flex; flex-direction: column; }
-    
-    header { background-color: #1E293B; padding: 25px 20px; text-align: center; border-bottom: 2px solid #2563EB; }
-    header h1 { color: #F8FAFC; font-size: 32px; letter-spacing: 2px; font-weight: 700; }
-    header p { color: #06B6D4; font-size: 14px; margin-top: 5px; font-weight: 600; }
-
-    nav { display: flex; justify-content: center; gap: 12px; background-color: #0F172A; padding: 15px; border-bottom: 1px solid #334155; flex-wrap: wrap; }
-    nav button { background: transparent; border: none; color: #94A3B8; font-weight: 600; padding: 10px 18px; border-radius: 8px; transition: all 0.3s; cursor: pointer; font-size: 15px; }
-    nav button:hover, nav button.active { color: #ffffff; background-color: #2563EB; }
-    
-    main { flex: 1; max-width: 950px; margin: 0 auto; width: 100%; padding: 30px 20px; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    .card { background-color: #1E293B; padding: 30px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-    h2 { color: #06B6D4; margin-bottom: 15px; font-size: 22px; }
-    h3 { color: #F8FAFC; margin-bottom: 10px; font-size: 18px; }
-    p { line-height: 1.7; color: #CBD5E1; margin-bottom: 15px; font-size: 15px; }
-
-    .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px; }
-    .review-card { background: #0F172A; padding: 18px; border-radius: 8px; border: 1px solid #334155; }
-    .stars { color: #FBBF24; margin-bottom: 8px; font-size: 16px; }
-    .reviewer { font-size: 13px; color: #06B6D4; font-weight: 600; display: block; margin-top: 10px; }
-
-    input, textarea { width: 100%; padding: 12px; background: #0F172A; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; margin-bottom: 12px; font-size: 14px; }
-    input:focus, textarea:focus { border-color: #06B6D4; }
-    button.btn { background: #06B6D4; color: #0F172A; border: none; font-weight: 700; padding: 12px 24px; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
-    button.btn:hover { background: #22d3ee; }
-
-    .chat-container { display: flex; flex-direction: column; height: 520px; background-color: #1E293B; border-radius: 12px; border: 1px solid #334155; overflow: hidden; }
-    .chat-header { background-color: #2563EB; color: white; padding: 16px; font-weight: 700; font-size: 18px; text-align: center; }
-    .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-    .msg { padding: 12px 16px; border-radius: 8px; max-width: 80%; line-height: 1.5; font-size: 14px; }
-    .user-msg { background-color: #2563EB; color: white; align-self: flex-end; }
-    .bot-msg { background-color: #334155; color: #F8FAFC; align-self: flex-start; }
-    .chat-input-area { display: flex; padding: 12px; background-color: #0F172A; border-top: 1px solid #334155; }
-    .chat-input-area input { flex: 1; margin-bottom: 0; }
-    .chat-input-area button { margin-left: 10px; height: 45px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: #1e293b;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #3b82f6;
+      margin-bottom: 10px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #334155;
+    }
+    .card h2 {
+      color: #60a5fa;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>RCDK</h1>
-    <p>Innovating Tech & Intelligent Systems</p>
-  </header>
+  <div class="container">
+    <header>
+      <h1>RCDK Project Showcase</h1>
+      <p>An interactive web platform built for modern responsiveness and performance.</p>
+    </header>
 
-  <nav>
-    <button class="nav-btn active" onclick="openTab(event, 'home')">Home</button>
-    <button class="nav-btn" onclick="openTab(event, 'about')">About</button>
-    <button class="nav-btn" onclick="openTab(event, 'projects')">Projects</button>
-    <button class="nav-btn" onclick="openTab(event, 'contact')">Contact Us</button>
-    <button class="nav-btn" onclick="openTab(event, 'complexity')">Complexity</button>
-  </nav>
+    <div class="card">
+      <h2>About the Project</h2>
+      <p>RCDK presents project features, technical architecture, and system capabilities through a lightweight, zero-latency interface hosted directly on GitHub Pages.</p>
+    </div>
 
-  <main>
-    <div id="home" class="tab-content active">
-      <div class="card">
-        <h2>Welcome to RCDK</h2>
-        <p>RCDK is a digital hub focusing on modern technology exploration, software development and innovation, and interactive tools built by the RCDK team.</p>
-      </div>
+    <div class="card">
+      <h2>Tech Stack</h2>
+      <p>Built with HTML5, CSS3, and modern JavaScript for maximum mobile speed and efficiency.</p>
+    </div>
 
-      <div class="card">
-        <h2>Community & User Reviews</h2>
-        <div class="review-grid" id="reviewGrid">
-          <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"The clean UI dark theme combined with Complexity AI makes browsing RCDK an awesome experience! Hats off to the RCDK team!"</p>
-            <span class="reviewer">- Tech Enthusiast</span>
-          </div>
-        </div>
+    <div class="card">
+      <h2>Contact</h2>
+      <p>Reach out to the project team for showcase questions or feature inquiries.</p>
+    </div>
+  </div>
 
-        <div style="margin-top: 25px;">
-          <h3>Leave a Review</h3>
-          <input type="text" id="reviewerName" placeholder="Your Name or Alias" />
-          <textarea id="reviewText" rows="3" placeholder="Write your review or feedback here..."></textarea>
-          <button class="btn" onclick="submitReview()">Submit Review</button>
-        </div>
+  <!-- RCDK Smart Assistant Widget -->
+  <div id="rcdk-chat-bubble" onclick="toggleRcdkChat()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #2563eb; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999;">
+    💬
+  </div>
+
+  <div id="rcdk-chat-window" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; height: 420px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 9999; font-family: sans-serif; overflow: hidden;">
+    <div style="background: #1e293b; padding: 12px 16px; color: white; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155;">
+      <span>RCDK AI Assistant</span>
+      <span onclick="toggleRcdkChat()" style="cursor: pointer; font-size: 18px; color: #94a3b8;">✖</span>
+    </div>
+    
+    <div id="rcdk-chat-messages" style="flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+      <div style="background: #334155; color: white; padding: 8px 12px; border-radius: 8px; max-width: 85%; align-self: flex-start; font-size: 14px;">
+        Hello! Welcome to RCDK. How can I help you today?
       </div>
     </div>
 
-    <div id="about" class="tab-content">
-      <div class="card">
-        <h2>About RCDK</h2>
-        <p>RCDK was created by four Teammates and close friends <strong>Ruthvik G Achar</strong>, <strong>Chinmaya T</strong>, <strong>Daiwik Krishna</strong>, and <strong>Kanishk Bhat</strong>.</p>
-      </div>
+    <div style="padding: 10px; background: #1e293b; display: flex; gap: 6px; border-top: 1px solid #334155;">
+      <input type="text" id="rcdk-user-input" placeholder="Ask a question..." onkeypress="handleRcdkKeyPress(event)" style="flex: 1; padding: 8px 12px; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; font-size: 14px;">
+      <button onclick="sendRcdkMessage()" style="background: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Send</button>
     </div>
-
-    <div id="projects" class="tab-content">
-      <div class="card">
-        <h2>Our Projects</h2>
-        <p>1. RCDK Digital Hub Portal</p>
-        <p>2. Complexity AI Assistant</p>
-      </div>
-    </div>
-
-    <div id="contact" class="tab-content">
-      <div class="card">
-        <h2>Contact Us</h2>
-        <input type="text" placeholder="Your Full Name" />
-        <input type="email" placeholder="Your Email Address" />
-        <textarea rows="4" placeholder="Your Message..."></textarea>
-        <button class="btn" onclick="alert('Thank you for reaching out!')">Send Message</button>
-      </div>
-    </div>
-
-    <div id="complexity" class="tab-content">
-      <div class="chat-container">
-        <div class="chat-header">Complexity AI</div>
-        <div class="chat-messages" id="chatMessages">
-          <div class="msg bot-msg">Hello! I am Complexity AI, created by the RCDK team. How can I assist you today?</div>
-        </div>
-        <div class="chat-input-area">
-          <input type="text" id="userInput" placeholder="Ask Complexity something..." onkeypress="handleKey(event)" />
-          <button class="btn" onclick="sendMessage()">Send</button>
-        </div>
-      </div>
-    </div>
-  </main>
+  </div>
 
   <script>
-    function openTab(evt, tabName) {
-      const contents = document.getElementsByClassName("tab-content");
-      for (let i = 0; i < contents.length; i++) contents[i].style.display = "none";
-      const buttons = document.getElementsByClassName("nav-btn");
-      for (let i = 0; i < buttons.length; i++) buttons[i].classList.remove("active");
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.classList.add("active");
+    function toggleRcdkChat() {
+      const win = document.getElementById('rcdk-chat-window');
+      win.style.display = win.style.display === 'none' || win.style.display === '' ? 'flex' : 'none';
     }
 
-    function handleKey(e) {
-      if (e.key === 'Enter') sendMessage();
+    function handleRcdkKeyPress(event) {
+      if (event.key === 'Enter') sendRcdkMessage();
     }
 
-    function submitReview() {
-      const name = document.getElementById('reviewerName').value.trim() || 'Anonymous Visitor';
-      const text = document.getElementById('reviewText').value.trim();
-      if (!text) return alert('Please enter a review message.');
-      const grid = document.getElementById('reviewGrid');
-      const newCard = document.createElement('div');
-      newCard.className = 'review-card';
-      newCard.innerHTML = `<div class="stars">★★★★★</div><p>"${text}"</p><span class="reviewer">- ${name}</span>`;
-      grid.appendChild(newCard);
-      document.getElementById('reviewerName').value = '';
-      document.getElementById('reviewText').value = '';
+    function sendRcdkMessage(customText) {
+      const input = document.getElementById('rcdk-user-input');
+      const msg = customText || input.value.trim();
+      if (!msg) return;
+
+      addRcdkMessage(msg, 'user');
+      if (!customText) input.value = '';
+
+      setTimeout(() => {
+        const botReply = getRcdkBotReply(msg.toLowerCase());
+        addRcdkMessage(botReply, 'bot');
+      }, 400);
     }
 
-    async function sendMessage() {
-      const input = document.getElementById('userInput');
-      const text = input.value.trim();
-      if (!text) return;
+    function addRcdkMessage(text, sender) {
+      const box = document.getElementById('rcdk-chat-messages');
+      const bubble = document.createElement('div');
+      bubble.style.padding = '8px 12px';
+      bubble.style.borderRadius = '8px';
+      bubble.style.maxWidth = '85%';
+      bubble.style.fontSize = '14px';
+      
+      if (sender === 'user') {
+        bubble.style.background = '#2563eb';
+        bubble.style.color = 'white';
+        bubble.style.alignSelf = 'flex-end';
+      } else {
+        bubble.style.background = '#334155';
+        bubble.style.color = 'white';
+        bubble.style.alignSelf = 'flex-start';
+      }
+      
+      bubble.innerHTML = text;
+      box.appendChild(bubble);
+      box.scrollTop = box.scrollHeight;
+    }
 
-      const container = document.getElementById('chatMessages');
+    function getRcdkBotReply(input) {
+      const clean = input.trim().toLowerCase();
 
-      // Add User Message
-      const userDiv = document.createElement('div');
-      userDiv.className = 'msg user-msg';
-      userDiv.innerText = text;
-      container.appendChild(userDiv);
-      input.value = '';
-      container.scrollTop = container.scrollHeight;
-
-      // Add Bot Message
-      const botDiv = document.createElement('div');
-      botDiv.className = 'msg bot-msg';
-      botDiv.innerText = "Thinking...";
-      container.appendChild(botDiv);
-      container.scrollTop = container.scrollHeight;
-
-      const q = text.toLowerCase();
-
-      // 1. DIRECT KNOWLEDGE ENGINE (Zero API Calls = Zero Errors)
-      if (q.includes("created") || q.includes("creator") || q.includes("who made") || q.includes("founder") || q.includes("built")) {
-        botDiv.innerText = "Complexity AI was created for the RCDK website by colleagues and friends Ruthvik G Achar, Chinmaya T, Daiwik Krishna, Kanishk Bhat.";
-        container.scrollTop = container.scrollHeight;
-        return;
-      }
-      if (q.includes("Ruthvik")) {
-        botDiv.innerText = "Ruthvik is a primary team member and creates the web framework for projects at RCDK.";
-        container.scrollTop = container.scrollHeight;
-        return;
-      }
-      if (q.includes("Chinmaya")) {
-        botDiv.innerText = "Chinmaya is a key team member and researcher at RCDK.";
-        container.scrollTop = container.scrollHeight;
-        return;
-      }
-      if (q.includes("Daiwik")) {
-        botDiv.innerText = "Daiwik is a core team member at RCDK focusing on testing and debugging.";
-        container.scrollTop = container.scrollHeight;
-        return;
-      }
-      if (q.includes("Kanishk")) {
-        botDiv.innerText = "Kanishk is an important team member at RCDK providing the working code for RCDK projects.";
-        container.scrollTop = container.scrollHeight;
-        return;
-      }
-      if (q.includes("capital") && (q.includes("us") || q.includes("united states") || q.includes("america"))) {
-        botDiv.innerText = "The capital of the United States is Washington, D.C.";
-        container.scrollTop = container.scrollHeight;
-        return;
-      }
-      if (q.includes("capital") && q.includes("india")) {
-        botDiv.innerText = "The capital of India is New Delhi.";
-        container.scrollTop = container.scrollHeight;
-        return;
-      }
-      if (q.includes("raksha bandhan") || q.includes("gift")) {
-        botDiv.innerText = "Great Raksha Bandhan gifts include personalized keepsakes, customized watches or jewelry, chocolate hampers, gadgets, or gift cards!";
-        container.scrollTop = container.scrollHeight;
-        return;
+      // General Knowledge & Teacher Test Questions
+      if (clean.includes('capital of india') || clean.includes('capital of karnataka') || clean.includes('delhi')) {
+        return "The capital of India is New Delhi!";
       }
 
-      // 2. Wikipedia Search Engine (Allowed on All Mobile Networks)
-      try {
-        const target = text.replace(/who is|what is|tell me about|where is/gi, '').trim();
-        const searchQ = target.length > 0 ? target : text;
+      // Greetings
+      if (clean.includes('hello') || clean.includes('hi') || clean.includes('hey') || clean.includes('namaste')) {
+        return "Hello! Welcome to RCDK. How can I help you with our project today?";
+      }
 
-        const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(searchQ)}`);
-        
-        if (wikiRes.ok) {
-          const wikiData = await wikiRes.json();
-          if (wikiData.extract) {
-            botDiv.innerText = wikiData.extract;
-            container.scrollTop = container.scrollHeight;
-            return;
-          }
-        }
-      } catch (err) { }
+      // Date / Year Created
+      if (clean.includes('when') || clean.includes('year') || clean.includes('created') || clean.includes('date') || clean.includes('started')) {
+        return "This project was built and deployed in 2026 for our presentation showcase!";
+      }
 
-      // 3. Clean Guaranteed Fallback
-      botDiv.innerText = `I am Complexity AI, built for the RCDK website. How may I assist you today`;
-      container.scrollTop = container.scrollHeight;
+      // What is RCDK / Project Overview
+      if (clean.includes('rcdk') || clean.includes('about') || clean.includes('what is') || clean.includes('project') || clean.includes('purpose')) {
+        return "<b>RCDK</b> is an interactive web platform designed to present project details, core features, and digital tools clearly.";
+      }
+
+      // Creator / Developer
+      if (clean.includes('who') || clean.includes('creator') || clean.includes('developer') || clean.includes('made') || clean.includes('author') || clean.includes('owner')) {
+        return "This project was built and deployed for our upcoming showcase to demonstrate clean web architecture and responsive design.";
+      }
+
+      // Tech Stack
+      if (clean.includes('tech') || clean.includes('language') || clean.includes('code') || clean.includes('html') || clean.includes('built') || clean.includes('stack')) {
+        return "RCDK is built using lightweight standard HTML5, CSS3, JavaScript, and hosted on GitHub Pages for high performance.";
+      }
+
+      // Features / Functions
+      if (clean.includes('feature') || clean.includes('help') || clean.includes('function') || clean.includes('can you do')) {
+        return "Key features include:<br>• Fast mobile performance<br>• Zero-latency interactive UI<br>• Custom embedded chat assistant<br>• Clean modern design";
+      }
+
+      // Contact
+      if (clean.includes('contact') || clean.includes('email') || clean.includes('reach') || clean.includes('phone') || clean.includes('message')) {
+        return "You can reach out directly via the site's Contact section or email our team!";
+      }
+
+      // Smart Fallback
+      return "I am trained to answer questions about RCDK! Try asking me about our <b>project details</b>, <b>tech stack</b>, <b>creation date</b>, or general info.";
     }
   </script>
-  
-  <!-- RCDK Smart Assistant Widget -->
-<div id="rcdk-chat-bubble" onclick="toggleRcdkChat()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #2563EB; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999;">
-  💬
-</div>
 
-<div id="rcdk-chat-window" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; height: 420px; background: #0F172A; border: 1px solid #334155; border-radius: 12px; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 9999; font-family: sans-serif; overflow: hidden;">
-  <div style="background: #1E293B; padding: 12px 16px; color: white; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155;">
-    <span>RCDK AI Assistant</span>
-    <span onclick="toggleRcdkChat()" style="cursor: pointer; font-size: 18px; color: #94A3B8;">✖</span>
-  </div>
-  
-  <div id="rcdk-chat-messages" style="flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
-    <div style="background: #334155; color: white; padding: 8px 12px; border-radius: 8px; max-width: 80%; align-self: flex-start; font-size: 14px;">
-      Hello! Welcome to RCDK. How can I help you today?
-    </div>
-  </div>
-
-  <div style="padding: 10px; background: #1E293B; display: flex; gap: 6px; border-top: 1px solid #334155;">
-    <input type="text" id="rcdk-user-input" placeholder="Ask a question..." onkeypress="handleRcdkKeyPress(event)" style="flex: 1; padding: 8px 12px; background: #0F172A; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; font-size: 14px;">
-    <button onclick="sendRcdkMessage()" style="background: #2563EB; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Send</button>
-  </div>
-</div>
-
-<script>
-  function toggleRcdkChat() {
-    const win = document.getElementById('rcdk-chat-window');
-    win.style.display = win.style.display === 'none' || win.style.display === '' ? 'flex' : 'none';
-  }
-
-  function handleRcdkKeyPress(event) {
-    if (event.key === 'Enter') sendRcdkMessage();
-  }
-
-  function sendRcdkMessage() {
-    const input = document.getElementById('rcdk-user-input');
-    const msg = input.value.trim();
-    if (!msg) return;
-
-    addRcdkMessage(msg, 'user');
-    input.value = '';
-
-    setTimeout(() => {
-      const botReply = getRcdkBotReply(msg.toLowerCase());
-      addRcdkMessage(botReply, 'bot');
-    }, 400);
-  }
-
-  function addRcdkMessage(text, sender) {
-    const box = document.getElementById('rcdk-chat-messages');
-    const bubble = document.createElement('div');
-    bubble.style.padding = '8px 12px';
-    bubble.style.borderRadius = '8px';
-    bubble.style.maxWidth = '80%';
-    bubble.style.fontSize = '14px';
-    
-    if (sender === 'user') {
-      bubble.style.background = '#2563EB';
-      bubble.style.color = 'white';
-      bubble.style.alignSelf = 'flex-end';
-    } else {
-      bubble.style.background = '#334155';
-      bubble.style.color = 'white';
-      bubble.style.alignSelf = 'flex-start';
-    }
-    
-    bubble.innerText = text;
-    box.appendChild(bubble);
-    box.scrollTop = box.scrollHeight;
-  }
-
-  function getRcdkBotReply(input) {
-    // Custom Knowledge Base - Matches keywords to answers
-    if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-      return "Hello! What would you like to know about RCDK?";
-    }
-    if (input.includes('rcdk') || input.includes('about') || input.includes('what is')) {
-      return "RCDK is an interactive web platform designed to present project details, technical features, and system resources clearly.";
-    }
-    if (input.includes('contact') || input.includes('email') || input.includes('reach')) {
-      return "You can reach out to the project team directly through the Contact section on this site.";
-    }
-    if (input.includes('help') || input.includes('feature')) {
-      return "I can answer questions about the site layout, project goals, contact information, and technical details!";
-    }
-    
-    // Default reply if query doesn't match a specific keyword
-    return "Thanks for reaching out! For specific questions regarding RCDK, feel free to ask about our project details, features, or contact options.";
-  }
-</script>
 </body>
-              </html>            
-                
+        </html>
