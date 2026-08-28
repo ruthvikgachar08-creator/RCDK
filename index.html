@@ -186,6 +186,131 @@
       return "I am trained to answer questions about RCDK! Try asking me about our <b>project details</b>, <b>tech stack</b>, <b>creation date</b>, or general info.";
     }
   </script>
+<script>
+  function getRcdkBotReply(input) {
+    const clean = input.trim().toLowerCase();
+
+    // ==========================================
+    // 1. PROJECT SPECIFICS & PERSONAL DETAILS
+    // ==========================================
+    if (clean.includes('daiwik')) return "Daiwik is the best friend of Ruthvik G Achar and a core supporter of the RCDK project!";
+    if (clean.includes('suketha') || clean.includes('inspired')) return "Suketha Mam inspired RCDK to make this AI chatbot!";
+    if (clean.includes('ruthvik') || clean.includes('creator') || clean.includes('developer') || clean.includes('made')) return "This project was designed and built by Ruthvik G Achar to demonstrate clean web architecture and interactive UI design.";
+    if (clean.includes('rcdk') || clean.includes('about') || clean.includes('purpose')) return "<b>RCDK</b> is an interactive web platform designed to showcase project features, technical architecture, and system capabilities clearly.";
+    if (clean.includes('tech') || clean.includes('stack') || clean.includes('code') || clean.includes('built')) return "RCDK is built using responsive HTML5, modern CSS3 styling, and client-side JavaScript, hosted live on GitHub Pages.";
+    if (clean.includes('when') || clean.includes('year') || clean.includes('created') || clean.includes('started')) return "This project was built and deployed in 2026 for our showcase presentation!";
+
+    // ==========================================
+    // 2. MASSIVE MULTI-CATEGORY KNOWLEDGE DICTIONARY
+    // ==========================================
+    const knowledgeBase = [
+      // --- INDIA, POLITICS & HISTORY ---
+      { keys: ['pm', 'prime minister', 'modi'], ans: "The Prime Minister of India is Narendra Modi." },
+      { keys: ['president of india', 'murmu'], ans: "The President of India is Droupadi Murmu." },
+      { keys: ['capital of india', 'delhi'], ans: "The capital of India is New Delhi." },
+      { keys: ['capital of karnataka', 'bengaluru', 'bangalore'], ans: "The capital of Karnataka is Bengaluru." },
+      { keys: ['isro', 'space agency india'], ans: "ISRO stands for Indian Space Research Organisation, headquartered in Bengaluru." },
+      { keys: ['national anthem', 'rabindranath', 'tagore'], ans: "Rabindranath Tagore wrote the Indian National Anthem (Jana Gana Mana)." },
+      { keys: ['national song', 'vande mataram', 'bankim'], ans: "Bankim Chandra Chatterjee wrote the national song, Vande Mataram." },
+      { keys: ['father of nation', 'gandhi', 'mahatma'], ans: "Mahatma Gandhi is revered as the Father of the Nation in India." },
+      { keys: ['national flower', 'lotus'], ans: "The national flower of India is the Lotus." },
+      { keys: ['national animal', 'tiger'], ans: "The national animal of India is the Royal Bengal Tiger." },
+      { keys: ['national bird', 'peacock'], ans: "The national bird of India is the Peacock." },
+      { keys: ['national sport', 'hockey'], ans: "Field Hockey is recognized as India's national sport." },
+      { keys: ['longest river in india', 'ganga', 'ganges'], ans: "The Ganga (Ganges) is the longest river in India." },
+      { keys: ['taj mahal', 'agra'], ans: "The Taj Mahal is located in Agra, Uttar Pradesh, built by Shah Jahan." },
+      { keys: ['constitution', 'ambedkar', 'law minister'], ans: "Dr. B. R. Ambedkar is known as the Father of the Indian Constitution." },
+      { keys: ['independence year', '1947'], ans: "India gained independence on August 15, 1947." },
+      { keys: ['republic day', '26 january'], ans: "India celebrates Republic Day on January 26 every year." },
+
+      // --- COMPUTERS, AI & TECH ---
+      { keys: ['cpu', 'brain of computer'], ans: "The CPU (Central Processing Unit) is the brain of the computer." },
+      { keys: ['father of computer', 'babbage'], ans: "Charles Babbage is recognized as the Father of the Computer." },
+      { keys: ['father of modern computer', 'turing'], ans: "Alan Turing is considered the father of modern computer science and AI." },
+      { keys: ['www', 'world wide web', 'berners-lee'], ans: "Tim Berners-Lee invented the World Wide Web in 1989." },
+      { keys: ['ram', 'random access'], ans: "RAM stands for Random Access Memory, which stores short-term volatile data." },
+      { keys: ['rom', 'read only'], ans: "ROM stands for Read-Only Memory, storing permanent boot code." },
+      { keys: ['ai', 'artificial intelligence'], ans: "AI refers to simulation of human intelligence in machines programmed to think and learn." },
+      { keys: ['first programmer', 'ada lovelace'], ans: "Ada Lovelace is recognized as the world's first computer programmer." },
+      { keys: ['binary', '0 and 1', 'base 2'], ans: "Computers use the binary number system, consisting of only 0s and 1s." },
+      { keys: ['operating system', 'os', 'windows', 'linux'], ans: "An Operating System manages computer hardware and software resources." },
+      { keys: ['html', 'hypertext'], ans: "HTML stands for HyperText Markup Language, used to structure web content." },
+      { keys: ['css', 'cascading style'], ans: "CSS stands for Cascading Style Sheets, used to style web pages." },
+      { keys: ['js', 'javascript'], ans: "JavaScript is a programming language that enables interactive web features." },
+
+      // --- SCIENCE, SPACE & PHYSICS ---
+      { keys: ['highest mountain', 'everest'], ans: "Mount Everest is the highest mountain peak in the world (8,848.86 m)." },
+      { keys: ['largest mammal', 'blue whale'], ans: "The Blue Whale is the largest animal/mammal ever known to exist." },
+      { keys: ['plants absorb', 'carbon dioxide', 'co2'], ans: "Plants absorb Carbon Dioxide during photosynthesis to produce oxygen." },
+      { keys: ['red planet', 'mars'], ans: "Mars is called the Red Planet due to iron oxide on its surface." },
+      { keys: ['largest planet', 'jupiter'], ans: "Jupiter is the largest planet in our solar system." },
+      { keys: ['closest planet', 'mercury'], ans: "Mercury is the closest planet to the Sun." },
+      { keys: ['speed of light'], ans: "The speed of light in a vacuum is approximately 300,000 km/s (186,000 miles/sec)." },
+      { keys: ['hardest substance', 'diamond'], ans: "Diamond is the hardest naturally occurring substance on Earth." },
+      { keys: ['boiling point water', '100 degree'], ans: "Pure water boils at 100°C (212°F) at standard atmospheric pressure." },
+      { keys: ['freezing point water', '0 degree'], ans: "Water freezes at 0°C (32°F)." },
+      { keys: ['gas we breathe', 'oxygen'], ans: "Humans breathe Oxygen (O2) for cellular respiration." },
+      { keys: ['most abundant gas', 'nitrogen'], ans: "Nitrogen makes up about 78% of Earth's atmosphere." },
+      { keys: ['bones in human body', '206'], ans: "An adult human body has 206 bones." },
+      { keys: ['largest organ', 'skin'], ans: "The skin is the human body's largest organ." },
+      { keys: ['formula of water', 'h2o'], ans: "The chemical formula for water is H2O." },
+      { keys: ['gravity', 'newton'], ans: "Sir Isaac Newton formulated the laws of motion and universal gravitation." },
+      { keys: ['einstein', 'relativity', 'e=mc2'], ans: "Albert Einstein developed the Theory of Relativity and famous equation E=mc²." },
+      { keys: ['natural satellite', 'moon'], ans: "The Moon is Earth's only natural satellite." },
+      { keys: ['sun', 'star'], ans: "The Sun is a yellow dwarf star at the center of our Solar System." },
+
+      // --- WORLD GEOGRAPHY & NATURE ---
+      { keys: ['largest ocean', 'pacific'], ans: "The Pacific Ocean is the largest and deepest ocean on Earth." },
+      { keys: ['largest desert', 'sahara'], ans: "The Sahara is the largest hot desert in the world." },
+      { keys: ['continents', 'how many continents'], ans: "There are 7 continents: Asia, Africa, North America, South America, Antarctica, Europe, Australia." },
+      { keys: ['largest country', 'russia'], ans: "Russia is the world's largest country by land area." },
+      { keys: ['smallest country', 'vatican'], ans: "Vatican City is the smallest independent state in the world." },
+      { keys: ['deepest point', 'mariana trench'], ans: "The Mariana Trench in the Pacific Ocean is the deepest point on Earth." },
+      { keys: ['longest river', 'nile', 'amazon'], ans: "The Nile River is traditionally considered the longest river in the world." },
+
+      // --- SPORTS & GENERAL FACTS ---
+      { keys: ['olympics', 'how often'], ans: "The Olympic Games are held every 4 years." },
+      { keys: ['god of cricket', 'sachin'], ans: "Sachin Tendulkar is widely known as the God of Cricket." },
+      { keys: ['cricket players', '11 players'], ans: "A cricket team consists of 11 playing members on the field." },
+      { keys: ['fastest animal', 'cheetah'], ans: "The Cheetah is the fastest land animal, reaching speeds up to 120 km/h." },
+      { keys: ['fastest bird', 'peregrine falcon'], ans: "The Peregrine Falcon is the fastest bird, diving at speeds over 300 km/h." },
+      { keys: ['pi', 'value of pi'], ans: "The mathematical constant Pi (π) is approximately 3.14159 or 22/7." },
+
+      // --- GREETINGS & RESPONSES ---
+      { keys: ['hello', 'hi', 'hey', 'namaste'], ans: "Hello! Welcome to RCDK AI. Ask me anything about our project, science, or general knowledge!" },
+      { keys: ['how are you', 'how r u'], ans: "I am functioning at 100% capacity and fully ready for Suketha Mam's presentation!" },
+      { keys: ['thank', 'thanks'], ans: "You are very welcome! Good luck with the showcase!" }
+    ];
+
+    // Search loop matching user query
+    for (let item of knowledgeBase) {
+      if (item.keys.some(k => clean.includes(k))) {
+        return item.ans;
+      }
+    }
+
+    // ==========================================
+    // 3. DYNAMIC FALLBACK SYSTEM FOR UNTRAINED QUESTIONS
+    // ==========================================
+    // If the question contains general interrogative words, answer intelligently
+    if (clean.startsWith('who')) {
+      return "That sounds like a question about a person! While my primary database covers <b>Ruthvik</b>, <b>Daiwik</b>, <b>Suketha Mam</b>, and major historical figures (like Modi, Gandhi, Babbage), you can ask me specifically about any of them!";
+    }
+    if (clean.startsWith('what')) {
+      return "Great question! I am trained on concepts like <b>RCDK project tech stack</b>, <b>CPU/Computers</b>, <b>Science facts (H2O, Mars)</b>, and <b>General Knowledge</b>. Try rephrasing with those keywords!";
+    }
+    if (clean.startsWith('where')) {
+      return "I can help with locations! Try asking about capitals (India, Karnataka), rivers (Ganga, Nile), mountains (Everest), or oceans!";
+    }
+    if (clean.startsWith('why') || clean.startsWith('how')) {
+      return "This RCDK AI executes instant client-side JavaScript logic! Ask me <b>'How is RCDK built?'</b> or <b>'Who inspired this project?'</b> to see how it works!";
+    }
+
+    // Ultimate default reply
+    return "I am trained on RCDK project info, Science, Tech, and GK! Try asking about: <b>Suketha Mam</b>, <b>Daiwik</b>, <b>ISRO</b>, <b>Prime Minister of India</b>, or <b>Father of Computer</b>.";
+  }
+</script>
+  
 <div id="rcdk-chat-bubble" onclick="toggleRcdkChat()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #2563eb; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999;">
   💬
 </div>
