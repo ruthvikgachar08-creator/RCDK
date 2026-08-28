@@ -66,7 +66,7 @@
     <div id="home" class="tab-content active">
       <div class="card">
         <h2>Welcome to RCDK</h2>
-        <p>RCDK is a digital hub focused on modern technology exploration, software development, and interactive tools built by Ruthvik G Achar and team.</p>
+        <p>RCDK is a digital hub focusing on modern technology exploration, software development and innovation, and interactive tools built by the RCDK team.</p>
       </div>
 
       <div class="card">
@@ -91,7 +91,7 @@
     <div id="about" class="tab-content">
       <div class="card">
         <h2>About RCDK</h2>
-        <p>RCDK was created by <strong>Ruthvik G Achar</strong> alongside team members <strong>Chinmaya</strong>, <strong>Daiwik</strong>, and <strong>Kanishk</strong>.</p>
+        <p>RCDK was created by four Teammates and close friends <strong>Ruthvik G Achar</strong>, <strong>Chinmaya T</strong>, <strong>Daiwik Krishna</strong>, and <strong>Kanishk Bhat</strong>.</p>
       </div>
     </div>
 
@@ -117,7 +117,7 @@
       <div class="chat-container">
         <div class="chat-header">Complexity AI</div>
         <div class="chat-messages" id="chatMessages">
-          <div class="msg bot-msg">Hello! I am Complexity AI, created for RCDK by Ruthvik G Achar. How can I assist you today?</div>
+          <div class="msg bot-msg">Hello! I am Complexity AI, created by the RCDK team. How can I assist you today?</div>
         </div>
         <div class="chat-input-area">
           <input type="text" id="userInput" placeholder="Ask Complexity something..." onkeypress="handleKey(event)" />
@@ -180,22 +180,27 @@
 
       // 1. DIRECT KNOWLEDGE ENGINE (Zero API Calls = Zero Errors)
       if (q.includes("created") || q.includes("creator") || q.includes("who made") || q.includes("founder") || q.includes("built")) {
-        botDiv.innerText = "Complexity AI was created for RCDK by Ruthvik G Achar, alongside team members Chinmaya, Daiwik, and Kanishk.";
+        botDiv.innerText = "Complexity AI was created for the RCDK website by colleagues and friends Ruthvik G Achar, Chinmaya T, Daiwik Krishna, Kanishk Bhat.";
         container.scrollTop = container.scrollHeight;
         return;
       }
-      if (q.includes("chinmaya")) {
-        botDiv.innerText = "Chinmaya is a core team member and Co-Developer of RCDK.";
+      if (q.includes("Ruthvik")) {
+        botDiv.innerText = "Ruthvik is a primary team member and creates the web framework for projects at RCDK.";
         container.scrollTop = container.scrollHeight;
         return;
       }
-      if (q.includes("daiwik")) {
-        botDiv.innerText = "Daiwik is a core team member at RCDK focusing on systems integration.";
+      if (q.includes("Chinmaya")) {
+        botDiv.innerText = "Chinmaya is a key team member and researcher at RCDK.";
         container.scrollTop = container.scrollHeight;
         return;
       }
-      if (q.includes("kanishk")) {
-        botDiv.innerText = "Kanishk is a core team member at RCDK focusing on content strategy and research.";
+      if (q.includes("Daiwik")) {
+        botDiv.innerText = "Daiwik is a core team member at RCDK focusing on testing and debugging.";
+        container.scrollTop = container.scrollHeight;
+        return;
+      }
+      if (q.includes("Kanishk")) {
+        botDiv.innerText = "Kanishk is an important team member at RCDK providing the working code for RCDK projects.";
         container.scrollTop = container.scrollHeight;
         return;
       }
@@ -233,7 +238,7 @@
       } catch (err) { }
 
       // 3. Clean Guaranteed Fallback
-      botDiv.innerText = `I am Complexity AI, built for RCDK by Ruthvik G Achar! Ask me about RCDK, team members, world facts, or gift ideas.`;
+      botDiv.innerText = `I am Complexity AI, built for the RCDK website. How may I assist you today`;
       container.scrollTop = container.scrollHeight;
     }
   </script>
