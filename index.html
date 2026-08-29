@@ -483,5 +483,165 @@
     return "I am trained to answer questions about RCDK! Try asking about our **project details**, **tech stack**, or **creation date**.";
   }
 </script>
+
+  <!-- FLOATING CHATBOT WIDGET -->
+<div id="rcdk-chat-bubble" onclick="toggleRcdkChat()" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #2563eb; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 99999;">
+  💬
+</div>
+
+<!-- CHAT WINDOW INTERFACE -->
+<div id="rcdk-chat-window" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 340px; height: 440px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 99999; font-family: sans-serif; overflow: hidden;">
+  <!-- HEADER BAR -->
+  <div style="background: #1e293b; padding: 12px 16px; color: white; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155;">
+    <span>🤖 RCDK AI Assistant</span>
+    <span onclick="toggleRcdkChat()" style="cursor: pointer; font-size: 18px; color: #94a3b8;">✖</span>
+  </div>
+  
+  <!-- MESSAGES DISPLAY AREA -->
+  <div id="rcdk-chat-messages" style="flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+    <div style="background: #334155; color: white; padding: 8px 12px; border-radius: 8px; max-width: 85%; align-self: flex-start; font-size: 14px;">
+      Hello! Welcome to RCDK AI. Ask me about our project or general knowledge!
+    </div>
+  </div>
+
+  <!-- INPUT AREA -->
+  <div style="padding: 10px; background: #1e293b; display: flex; gap: 6px; border-top: 1px solid #334155;">
+    <input type="text" id="rcdk-user-input" placeholder="Ask a question..." onkeypress="handleRcdkKeyPress(event)" style="flex: 1; padding: 8px 12px; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 6px; outline: none; font-size: 14px;">
+    <button onclick="sendRcdkMessage()" style="background: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">Send</button>
+  </div>
+</div>
+
+<script>
+  function toggleRcdkChat() {
+    const win = document.getElementById('rcdk-chat-window');
+    if (win.style.display === 'none' || win.style.display === '') {
+      win.style.display = 'flex';
+    } else {
+      win.style.display = 'none';
+    }
+  }
+
+  function handleRcdkKeyPress(event) {
+    if (event.key === 'Enter') {
+      sendRcdkMessage();
+    }
+  }
+
+  function sendRcdkMessage() {
+    const input = document.getElementById('rcdk-user-input');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    addRcdkMessage(msg, 'user');
+    input.value = '';
+
+    setTimeout(function() {
+      const botReply = getRcdkBotReply(msg.toLowerCase());
+      addRcdkMessage(botReply, 'bot');
+    }, 200);
+  }
+
+  function addRcdkMessage(text, sender) {
+    const box = document.getElementById('rcdk-chat-messages');
+    const bubble = document.createElement('div');
+    bubble.style.padding = '8px 12px';
+    bubble.style.borderRadius = '8px';
+    bubble.style.maxWidth = '85%';
+    bubble.style.fontSize = '14px';
+    
+    if (sender === 'user') {
+      bubble.style.background = '#2563eb';
+      bubble.style.color = 'white';
+      bubble.style.alignSelf = 'flex-end';
+    } else {
+      bubble.style.background = '#334155';
+      bubble.style.color = 'white';
+      bubble.style.alignSelf = 'flex-start';
+    }
+    
+    bubble.innerHTML = text;
+    box.appendChild(bubble);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function getRcdkBotReply(clean) {
+    // 1. Project Specifics
+    if (clean.includes('daiwik')) return "Daiwik is the best friend of Ruthvik G Achar and a core supporter of the RCDK project!";
+    if (clean.includes('suketha') || clean.includes('inspired')) return "Suketha Mam inspired RCDK to make this AI chatbot!";
+    if (clean.includes('ruthvik') || clean.includes('creator') || clean.includes('developer') || clean.includes('made')) return "This project was designed and built by Ruthvik G Achar to demonstrate clean web architecture and interactive UI design.";
+    if (clean.includes('rcdk') || clean.includes('about') || clean.includes('purpose')) return "<b>RCDK</b> is an interactive web platform designed to showcase project features, technical architecture, and system capabilities clearly.";
+    if (clean.includes('tech') || clean.includes('stack') || clean.includes('code') || clean.includes('built')) return "RCDK is built using responsive HTML5, modern CSS3 styling, and client-side JavaScript, hosted live on GitHub Pages.";
+    if (clean.includes('when') || clean.includes('year') || clean.includes('created') || clean.includes('started')) return "This project was built and deployed in 2026 for our showcase presentation!";
+
+    // 2. GK & Geography Dictionary
+    const knowledgeBase = [
+      // --- GENERAL KNOWLEDGE ---
+      { keys: ['capital of india', 'delhi'], ans: "The capital of India is New Delhi!" },
+      { keys: ['father of the nation', 'gandhi'], ans: "Mahatma Gandhi is known as the Father of the Nation in India!" },
+      { keys: ['red planet', 'mars'], ans: "Mars is known as the Red Planet!" },
+      { keys: ['largest ocean', 'pacific ocean'], ans: "The Pacific Ocean is the largest ocean in the world!" },
+      { keys: ['invented the telephone', 'telephone', 'bell'], ans: "Alexander Graham Bell invented the telephone!" },
+      { keys: ['national animal', 'bengal tiger', 'tiger of india'], ans: "The national animal of India is the Bengal Tiger!" },
+      { keys: ['longest river in the world', 'longest river', 'nile'], ans: "The Nile River is the longest river in the world!" },
+      { keys: ['how many continents', 'continents in the world'], ans: "There are 7 continents in the world!" },
+      { keys: ['walk on the moon', 'neil armstrong', 'first person on moon'], ans: "Neil Armstrong was the first person to walk on the Moon!" },
+      { keys: ['currency of japan', 'yen'], ans: "The currency of Japan is the Japanese Yen!" },
+      { keys: ['national flower', 'lotus'], ans: "The national flower of India is the Lotus!" },
+      { keys: ['national anthem', 'tagore', 'rabindranath'], ans: "Rabindranath Tagore wrote the Indian National Anthem!" },
+      { keys: ['plants absorb', 'carbon dioxide', 'co2'], ans: "Plants absorb Carbon Dioxide from the atmosphere!" },
+      { keys: ['largest mammal', 'blue whale'], ans: "The Blue Whale is the largest mammal in the world!" },
+      { keys: ['highest mountain', 'everest'], ans: "Mount Everest is the highest mountain in the world!" },
+
+      // --- GEOGRAPHY GK ---
+      { keys: ['largest continent', 'asia'], ans: "Asia is the largest continent in the world!" },
+      { keys: ['smallest continent', 'australia'], ans: "Australia is the smallest continent!" },
+      { keys: ['smallest ocean', 'arctic ocean'], ans: "The Arctic Ocean is the smallest ocean!" },
+      { keys: ['mountain range', 'himalayas'], ans: "Mount Everest is located in the Himalayas mountain range!" },
+      { keys: ['largest country', 'russia'], ans: "Russia is the largest country by area!" },
+      { keys: ['smallest country', 'vatican'], ans: "Vatican City is the smallest country in the world!" },
+      { keys: ['largest desert', 'antarctica'], ans: "Antarctica is the largest desert overall in the world!" },
+      { keys: ['largest hot desert', 'sahara'], ans: "The Sahara Desert is the largest hot desert in the world!" },
+      { keys: ['where is sahara', 'continent is the sahara'], ans: "The Sahara Desert is located on the continent of Africa!" },
+      { keys: ['south america', 'amazon river'], ans: "The Amazon River is the longest river in South America!" },
+      { keys: ['flows through egypt', 'egypt river'], ans: "The Nile River flows through Egypt!" },
+      { keys: ['largest island', 'greenland'], ans: "Greenland is the largest island in the world!" },
+      { keys: ['rising sun', 'land of the rising sun'], ans: "Japan is known as the Land of the Rising Sun!" },
+      { keys: ['largest population', 'most population'], ans: "India has the largest population in the world!" },
+      { keys: ['capital of australia', 'canberra'], ans: "The capital of Australia is Canberra!" },
+      { keys: ['capital of canada', 'ottawa'], ans: "The capital of Canada is Ottawa!" },
+      { keys: ['capital of brazil', 'brasilia'], ans: "The capital of Brazil is Brasília!" },
+      { keys: ['capital of egypt', 'cairo'], ans: "The capital of Egypt is Cairo!" },
+      { keys: ['between africa and australia', 'indian ocean'], ans: "The Indian Ocean lies between Africa and Australia!" },
+      { keys: ['equator', 'divides earth'], ans: "The Equator is the imaginary line that divides Earth into the Northern and Southern Hemispheres!" },
+      { keys: ['prime meridian', '0 degree longitude'], ans: "The Prime Meridian is the 0° longitude line!" },
+      { keys: ['suez canal'], ans: "The Suez Canal separates Africa and Asia!" },
+      { keys: ['barrier reef', 'great barrier reef'], ans: "Australia is famous for the Great Barrier Reef!" },
+      { keys: ['largest lake', 'caspian sea'], ans: "The Caspian Sea is the largest lake by surface area!" },
+      { keys: ['most time zones', 'time zones'], ans: "France has the most time zones (including its overseas territories)!" },
+      { keys: ['longest coastline', 'coastline in india', 'gujarat'], ans: "Gujarat has the longest coastline among Indian states!" },
+      { keys: ['southernmost continent'], ans: "Antarctica is the southernmost continent!" },
+
+      // --- SYSTEM & GREETINGS ---
+      { keys: ['pm of india', 'prime minister', 'modi'], ans: "The Prime Minister of India is Narendra Modi." },
+      { keys: ['president of india', 'murmu'], ans: "The President of India is Droupadi Murmu." },
+      { keys: ['cpu', 'brain of computer'], ans: "The CPU is known as the brain of the computer." },
+      { keys: ['father of computer', 'babbage'], ans: "Charles Babbage is known as the Father of the Computer." },
+      { keys: ['hello', 'hi', 'hey', 'namaste'], ans: "Hello! Welcome to RCDK AI. Ask me anything about our project or general knowledge!" },
+      { keys: ['how are you', 'how r u'], ans: "I am functioning at 100% capacity and ready for the presentation!" }
+    ];
+
+    // Search Loop
+    for (let i = 0; i < knowledgeBase.length; i++) {
+      let item = knowledgeBase[i];
+      for (let j = 0; j < item.keys.length; j++) {
+        if (clean.includes(item.keys[j])) {
+          return item.ans;
+        }
+      }
+    }
+
+    return "I am trained on RCDK project info, team details, and General Knowledge! Try asking about: <b>Suketha Mam</b>, <b>Daiwik</b>, <b>Geography</b>, or <b>PM of India</b>.";
+  }
+</script>
 </body>
         </html>
